@@ -27,6 +27,24 @@ ModelImporter:
   - first:
       74: 986517712409940351
     second: Armature|TPose (1)
+  - first:
+      74: -2518491748248799349
+    second: Armature|Soldier_Shooting
+  - first:
+      74: -1252116541108886886
+    second: Armature|Soldier_Idle
+  - first:
+      74: -3909590146611944008
+    second: Armature|Soldier_Running
+  - first:
+      74: 4447962815367106394
+    second: Armature|Soldier_Searching
+  - first:
+      74: -4989886338021743497
+    second: Armature|Soldier_T_Pose
+  - first:
+      74: -609150728920793692
+    second: Armature|Soldier_Walking
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -57,8 +75,8 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature|Firing
-      takeName: Armature|Firing
+      name: Armature|Soldier_Shooting
+      takeName: Armature|Soldier_Shooting
       internalID: 0
       firstFrame: 0
       lastFrame: 6
@@ -86,11 +104,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Idle
-      takeName: Armature|Idle
+      name: Armature|Soldier_Idle
+      takeName: Armature|Soldier_Idle
       internalID: 0
       firstFrame: 0
-      lastFrame: 257
+      lastFrame: 231
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -115,8 +133,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Running
-      takeName: Armature|Running
+      name: Armature|Soldier_Running
+      takeName: Armature|Soldier_Running
       internalID: 0
       firstFrame: 0
       lastFrame: 20
@@ -144,8 +162,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Searching
-      takeName: Armature|Searching
+      name: Armature|Soldier_Searching
+      takeName: Armature|Soldier_Searching
       internalID: 0
       firstFrame: 0
       lastFrame: 59
@@ -173,8 +191,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|TPose
-      takeName: Armature|TPose
+      name: Armature|Soldier_T_Pose
+      takeName: Armature|Soldier_T_Pose
       internalID: 0
       firstFrame: 0
       lastFrame: 1
@@ -202,11 +220,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Walking
-      takeName: Armature|Walking
+      name: Armature|Soldier_Walking
+      takeName: Armature|Soldier_Walking
       internalID: 0
       firstFrame: 0
-      lastFrame: 127
+      lastFrame: 56
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -233,7 +251,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.58
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -286,7 +304,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.0058
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
