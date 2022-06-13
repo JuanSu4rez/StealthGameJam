@@ -6,34 +6,22 @@ using UnityEngine.AI;
 
 public class PatrolState : MonoBehaviour, ISoldierState
 {
-    public SoldierStates soldierState { get => SoldierStates.patrolling; }
+    public PatrolStates PatrolStateValue { get; set; } = PatrolStates._none;
+    public SoldierStates SoldierState { get => SoldierStates.patrol; }
+    public int IndexPosition { get; set; }
     [SerializeField]
     private Transform pointsContainer;
     private Transform[] _positionsToPatrol;
-    private Transform _positionToGo;
-    private int _currentPosition = 0;
-    private NavMeshAgent goNavMeshAgent;
-    private float distanceOfTolerance = 0.8f;
+    private bool HasStarted = false;
     void Start() {
-        goNavMeshAgent = this.GetComponent<NavMeshAgent>();
-        _positionsToPatrol =  pointsContainer.Cast<Transform>().ToArray();
-        _currentPosition = 0;
-        _positionToGo = _positionsToPatrol[_currentPosition];
-        goNavMeshAgent.SetDestination(_positionToGo.position);
+        _positionsToPatrol = pointsContainer.Cast<Transform>().ToArray();
+        IndexPosition = -1;
+        this.enabled = false;
     }
-    void Update() {
-        var position = transform.position;
-        float distanceToDestiny = Mathf.Abs(Vector3.Distance(position, _positionToGo.position));
-        if(distanceToDestiny <= distanceOfTolerance) {
-            transform.position = _positionToGo.position;
-            goNavMeshAgent.ResetPath();
-            goNavMeshAgent.SetDestination(NextPosition());
-        }
-    }
-    private Vector3 NextPosition() {
-        _currentPosition++;
-        _currentPosition = _currentPosition % _positionsToPatrol.Length;
-        _positionToGo = _positionsToPatrol[_currentPosition];
-        return _positionToGo.position;
+
+    public Vector3 NextPosition() {
+        PatrolStateValue = PatrolStates.locomotion;
+        IndexPosition = ( IndexPosition + 1 ) % _positionsToPatrol.Length;
+        return _positionsToPatrol[IndexPosition].position;
     }
 }

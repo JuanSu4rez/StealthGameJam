@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
-public class HearingController : MonoBehaviour
+public class HearingController : MonoBehaviour, IHearingHandler
 {
     private SoilderMachineState _soldierMachineState;
+
+
     // Use this for initialization
     void Start() {
 
@@ -13,4 +16,9 @@ public class HearingController : MonoBehaviour
     void Update() {
 
     }
+
+    public void HandleHearing(Collider collider) {
+
+    }
+
 }

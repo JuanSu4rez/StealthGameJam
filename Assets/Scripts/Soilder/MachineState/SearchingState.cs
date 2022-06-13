@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SearchingState : MonoBehaviour, ISoldierState
 {
-    public SoldierStates soldierState { get => SoldierStates.searching; }
+    public SoldierStates SoldierState { get => SoldierStates.searching; }
     // Start is called before the first frame update
     void Start()
     {

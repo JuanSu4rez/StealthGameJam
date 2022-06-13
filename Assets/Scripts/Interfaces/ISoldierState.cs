@@ -2,5 +2,5 @@
 using System.Collections;
 
 public interface ISoldierState {
-    SoldierStates soldierState { get;  }
+    SoldierStates SoldierState { get;  }
 }

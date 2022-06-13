@@ -4,11 +4,25 @@ using System.Collections;
 public enum SoldierStates
 {
     _none,
-    patrolling,
     attacking,
-    searching,
-    returningtopatroll
+    patrol,
+    searching
 }
+
+public enum PatrolStates
+{
+    _none,
+    locomotion,
+    inspecting
+}
+
+public enum AttackingStatesValues
+{
+    _none,
+    chasing,
+    attacking
+}
+
 
 public enum SoldierAnimationStates
 {
