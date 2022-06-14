@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
+using System;
 
 public class LocoMotionState : MonoBehaviour
 {
@@ -34,5 +35,13 @@ public class LocoMotionState : MonoBehaviour
     }
     private void OnEnable() {
         IsMoving = true;
+    }
+
+    internal void DisableLocomotion() {
+        if(_goNavMeshAgent.enabled) {
+            _goNavMeshAgent.ResetPath();
+            _goNavMeshAgent.enabled = false;
+        }
+        this.enabled = false;
     }
 }

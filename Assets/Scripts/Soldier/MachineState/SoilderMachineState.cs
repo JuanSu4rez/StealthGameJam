@@ -28,10 +28,14 @@ public class SoilderMachineState : MonoBehaviour
     }
 
     public void SetState<T>(T newState) where T : MonoBehaviour, ISoldierState {
-        LocomotionState.enabled = false;
-        currentState.enabled = false;
+        if(LocomotionState) {
+            LocomotionState.DisableLocomotion();
+        }
+        if(currentState)
+            currentState.enabled = false;
         currentState = newState;
-        currentState.enabled = true;
+        if(currentState)
+            currentState.enabled = true;
     }
 
     public bool ValidateState(SoldierStates state) {

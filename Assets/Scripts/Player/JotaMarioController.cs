@@ -20,7 +20,7 @@ public class JotaMarioController : MonoBehaviour{
             float horizontalInput = Input.GetAxis("Horizontal");
             var vector2 = new Vector2(-horizontalInput, verticalInput);
             var angle = Vector2.SignedAngle(Vector2.up, vector2);
-            Debug.Log(angle + " " + vector2);
+            //Debug.Log(angle + " " + vector2);
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
             var movement = ( transform.forward * verticalInput ) +
                            ( transform.right * -horizontalInput );

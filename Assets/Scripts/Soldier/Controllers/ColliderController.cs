@@ -23,12 +23,9 @@ public class ColliderController : MonoBehaviour
     }
     //Upon collision with another GameObject, this GameObject will reverse direction
     private void OnTriggerEnter(Collider other) {
-        if(!_soldierMachineState.ValidateState(SoldierStates.patrol)) {
-            return;
-        }
         var onvisionCollider = false;
         if(other.name == "Cyborg") {
-            Debug.Log("*****");
+           var playerController =  other.GetComponent<IPlayerController>();
 
             if(visionCollider != null) {
                 //Debug.Log("Is Vision Collider " + ( other.bounds == visionCollider.bounds ));
@@ -41,9 +38,38 @@ public class ColliderController : MonoBehaviour
                 watchingController.HandleWatching(other);
             }
             else {
-                var palyerisWalking = true;
+
+                var palyerisWalking = playerController.PlayerState == PlayerStates.walking ||
+                                      playerController.PlayerState ==  PlayerStates.walkingCrouch;
+                Debug.Log("OnTriggerEnter " + palyerisWalking);
                 if(palyerisWalking) {
-                 //   hearingController.HandleHearing(other);
+                   hearingController.HandleHearing(other);
+                }
+            }
+        }
+    }
+    void OnTriggerStay(Collider other) {
+        var onvisionCollider = false;
+        if(other.name == "Cyborg") {
+            var playerController = other.GetComponent<IPlayerController>();
+
+            if(visionCollider != null) {
+                //Debug.Log("Is Vision Collider " + ( other.bounds == visionCollider.bounds ));
+                if(visionCollider.ClosestPointOnBounds(other.transform.position) == other.transform.position) {
+                    Debug.Log(other.name + " IS ON vision range Stay");
+                    onvisionCollider = true;
+                }
+            }
+            if(onvisionCollider) {
+                watchingController.HandleWatching(other);
+            }
+            else {
+
+                var palyerisWalking = playerController.PlayerState == PlayerStates.walking ||
+                                      playerController.PlayerState == PlayerStates.walkingCrouch;
+                Debug.Log("OnTriggerEnter " + palyerisWalking);
+                if(palyerisWalking) {
+                    hearingController.HandleHearing(other);
                 }
             }
         }
@@ -53,7 +79,7 @@ public class ColliderController : MonoBehaviour
             return;
         }
         if(other.name == "Cyborg") {
-            Debug.Log("OnTriggerExit");
+            //Debug.Log("OnTriggerExit");
             _soldierMachineState.PatrolState.PatrolStateValue = PatrolStates.locomotion;
             _soldierMachineState.SetState(_soldierMachineState.PatrolState);
         }
