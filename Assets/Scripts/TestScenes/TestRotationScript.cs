@@ -9,28 +9,33 @@ public class TestRotationScript : MonoBehaviour
     public GameObject A;
     public GameObject B;
     public GameObject C;
-    private float timeCount = 0.0f;
-    Quaternion to;
-    private float angle = 0;
-    private void Start() {
-
-        angle = calculate(); 
-        this.to = Quaternion.AngleAxis(angle, Vector3.up);
+    bool rotating = false;
+    void Start() {
+        StartRotationCourutine();
     }
-
-    private int calculate() {
-        var calculated = A.transform.position - this.transform.position;
-        var forward = Vector3.forward;
-        return (int)Vector3.SignedAngle(forward, calculated, Vector3.up);
-    }
-
     void Update() {
-        transform.rotation = Quaternion.Slerp(this.transform.rotation, to, timeCount);
-        timeCount = timeCount + Time.deltaTime;
-        var newangle = calculate();
-        if(newangle != angle) {
-            angle = newangle;
-            this.to = Quaternion.AngleAxis(angle, Vector3.up);
+        Debug.DrawRay(this.transform.position, this.transform.forward, Color.blue);
+    }
+    void StartRotationCourutine() {
+        var calculated =  this.transform.position - A.transform.position;
+        var angle = (int)Vector3.SignedAngle(this.transform.forward, calculated, Vector3.up);
+        var myAngle = this.transform.rotation.eulerAngles.y;
+        Debug.Log(angle + " " + myAngle);
+        var to = Quaternion.AngleAxis(angle, Vector3.up);
+        StartCoroutine(LerpFunction(to, 5));
+
+    }
+    IEnumerator LerpFunction(Quaternion endValue, float duration) {
+        rotating = true;
+        yield return new WaitForSeconds(0.2f);
+        float time = 0;
+        Quaternion startValue = transform.rotation;
+        while(time < duration) {
+            transform.rotation = Quaternion.Lerp(startValue, endValue, time / duration);
+            time += Time.deltaTime;
+            yield return null;
         }
+        transform.rotation = endValue;
+        rotating = false;
     }
 }
