@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour, IPlayerController
 {
 
-    public float movementSpeed = 2;
+    public float movementSpeed = 4;
     public float movementCrouchSpeed = 1;
     private Rigidbody rb;
     private PlayerStates _playerState;
@@ -14,9 +14,11 @@ public class PlayerController : MonoBehaviour, IPlayerController
     public bool IsOnCrouchPosition { get => _isOnCrouchPosition; }
     private int _indexCapsuleCollider = 0;
     private CapsuleCollider[] capsuleColliders;
+    private Animator animator;
     void Start() {
         _playerState = PlayerStates._none;
         rb = gameObject.GetComponent<Rigidbody>();
+        animator = gameObject.GetComponent<Animator>();
         capsuleColliders = this.GetComponents<CapsuleCollider>();
         capsuleColliders[0].enabled = true;
         if(capsuleColliders.Length > 1) {
@@ -28,7 +30,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
         MovePlayer();
     }
     void MovePlayer() {
-        _playerState = PlayerStates.still;
+        _playerState = PlayerStates.idle;
 
         /// shift button validation
         _isOnCrouchPosition = Input.GetKey(KeyCode.LeftShift);
@@ -48,7 +50,8 @@ public class PlayerController : MonoBehaviour, IPlayerController
         ///Movement
         var speed = _isOnCrouchPosition ? movementCrouchSpeed : movementSpeed;
         //Debug.Log($"IsOnCrouchPosition {_isOnCrouchPosition}");
-        if(Input.GetButton("Vertical") || Input.GetButton("Horizontal")) {
+        var isMoving = Input.GetButton("Vertical") || Input.GetButton("Horizontal");
+        if(isMoving) {
             _playerState = PlayerStates.walking;
             float verticalInput = Input.GetAxis("Vertical");
             float horizontalInput = Input.GetAxis("Horizontal");
@@ -61,5 +64,18 @@ public class PlayerController : MonoBehaviour, IPlayerController
             transform.Translate(movement * Time.deltaTime * speed);
         }
         ///
+        if(isMoving) {
+            _playerState = PlayerStates.walking;
+            if(_isOnCrouchPosition)
+                _playerState = PlayerStates.walkingCrouch;
+        }
+        else {
+            _playerState = PlayerStates.idle;
+            if(_isOnCrouchPosition)
+                _playerState = PlayerStates.idleCrouch;
+        }
+
+        animator.SetInteger("playerState", (int)_playerState);
+
     }
 }
