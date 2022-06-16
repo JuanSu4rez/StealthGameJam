@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
 public class PlayerController : MonoBehaviour, IPlayerController
 {
-
+    public LayerMask ObstaclesLayerMask;
+    public GameObject origin = null;
     public float movementSpeed = 4;
     public float movementCrouchSpeed = 1;
     private Rigidbody rb;
@@ -77,5 +78,23 @@ public class PlayerController : MonoBehaviour, IPlayerController
 
         animator.SetInteger("playerState", (int)_playerState);
 
+    }
+
+    CapsuleCollider GetActiveCollider() {
+        return capsuleColliders.FirstOrDefault(p => p.enabled);
+    }
+
+    public bool CollideWithWall(GameObject reference) {
+        var _origin = origin.transform.position;
+        var gopos = reference.transform.position;
+        var distance = reference.transform.position - origin.transform.position;
+        Debug.DrawLine(gopos, _origin, Color.green);
+        RaycastHit[] hits = Physics.RaycastAll(_origin, ( distance ).normalized, distance.magnitude, ObstaclesLayerMask);
+        if(hits.Length > 0) {
+            var values = hits.Select(p => p.collider.gameObject.name);
+            Debug.Log("Object hit " + hits.Length + string.Join(";", values));
+            return true;
+        }
+        return false;
     }
 }

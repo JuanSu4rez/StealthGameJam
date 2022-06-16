@@ -14,28 +14,39 @@ public class TestRotationScript : MonoBehaviour
         StartRotationCourutine();
     }
     void Update() {
-        Debug.DrawRay(this.transform.position, this.transform.forward, Color.blue);
+        if(!rotating) {
+            StartCoroutine(LerpFunction(transform.rotation, 5));
+        }
     }
     void StartRotationCourutine() {
-        var calculated =  this.transform.position - A.transform.position;
-        var angle = (int)Vector3.SignedAngle(this.transform.forward, calculated, Vector3.up);
-        var myAngle = this.transform.rotation.eulerAngles.y;
-        Debug.Log(angle + " " + myAngle);
-        var to = Quaternion.AngleAxis(angle, Vector3.up);
-        StartCoroutine(LerpFunction(to, 5));
+        
+        StartCoroutine(LerpFunction(transform.rotation, 5));
 
     }
-    IEnumerator LerpFunction(Quaternion endValue, float duration) {
+    IEnumerator LerpFunction(Quaternion startValue, float duration) {
         rotating = true;
-        yield return new WaitForSeconds(0.2f);
+        
         float time = 0;
-        Quaternion startValue = transform.rotation;
+        var initialAngle = startValue.eulerAngles.y;
+        if(initialAngle < 0)
+            initialAngle += 360;
+        
+        var newAngle = initialAngle + UnityEngine.Random.Range(100, 180);
+
         while(time < duration) {
-            transform.rotation = Quaternion.Lerp(startValue, endValue, time / duration);
+            var current = Mathf.Lerp(initialAngle, newAngle, time / duration);
+            transform.rotation = Quaternion.AngleAxis(current, Vector3.up);
             time += Time.deltaTime;
             yield return null;
         }
-        transform.rotation = endValue;
-        rotating = false;
+        transform.rotation = Quaternion.AngleAxis(newAngle, Vector3.up);
+   
+        StartCoroutine(WaitRandomly());
     }
+    IEnumerator WaitRandomly() {
+        yield return new WaitForSeconds(UnityEngine.Random.Range(2, 10));
+        rotating = false;
+      
+    }
+
 }

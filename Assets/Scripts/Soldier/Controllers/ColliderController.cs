@@ -30,7 +30,7 @@ public class ColliderController : MonoBehaviour
             if(visionCollider != null) {
                 //Debug.Log("Is Vision Collider " + ( other.bounds == visionCollider.bounds ));
                 if(visionCollider.ClosestPointOnBounds(other.transform.position) == other.transform.position) {
-                    Debug.Log(other.name + " IS ON vision range");
+                    //Debug.Log(other.name + " IS ON vision range");
                     onvisionCollider = true;
                 }
             }
@@ -41,7 +41,7 @@ public class ColliderController : MonoBehaviour
 
                 var palyerisWalking = playerController.PlayerState == PlayerStates.walking ||
                                       playerController.PlayerState ==  PlayerStates.walkingCrouch;
-                Debug.Log("OnTriggerEnter " + palyerisWalking);
+                //Debug.Log("OnTriggerEnter " + palyerisWalking);
                 if(palyerisWalking) {
                    hearingController.HandleHearing(other);
                 }
@@ -56,7 +56,7 @@ public class ColliderController : MonoBehaviour
             if(visionCollider != null) {
                 //Debug.Log("Is Vision Collider " + ( other.bounds == visionCollider.bounds ));
                 if(visionCollider.ClosestPointOnBounds(other.transform.position) == other.transform.position) {
-                    Debug.Log(other.name + " IS ON vision range Stay");
+                    //Debug.Log(other.name + " IS ON vision range Stay");
                     onvisionCollider = true;
                 }
             }
@@ -67,7 +67,7 @@ public class ColliderController : MonoBehaviour
 
                 var palyerisWalking = playerController.PlayerState == PlayerStates.walking ||
                                       playerController.PlayerState == PlayerStates.walkingCrouch;
-                Debug.Log("OnTriggerEnter " + palyerisWalking);
+                //Debug.Log("OnTriggerEnter " + palyerisWalking);
                 if(palyerisWalking) {
                     hearingController.HandleHearing(other);
                 }
