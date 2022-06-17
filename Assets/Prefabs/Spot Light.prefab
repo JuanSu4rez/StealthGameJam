@@ -110,6 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3678ebabb8c847479116bcf580612d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alarm: {fileID: 0}
 --- !u!95 &3803202741995973706
 Animator:
   serializedVersion: 4
@@ -156,5 +157,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 4.5
+  m_Radius: 4.2
   m_Center: {x: 0, y: 0, z: 18}

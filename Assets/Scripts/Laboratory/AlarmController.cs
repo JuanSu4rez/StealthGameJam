@@ -8,7 +8,7 @@ public class AlarmController : MonoBehaviour
     private Light light;
     private Color originalColor;
     private float originalIntensity;
-    private float finalIntensity;
+    public float finalIntensity;
     private float targetIntensity;
     private float speed;
     private bool lightGoingUp;
@@ -26,8 +26,8 @@ public class AlarmController : MonoBehaviour
     {
         originalColor = light.color;
         originalIntensity = light.intensity;
-        finalIntensity = 3f;
-        speed = 2f;
+        finalIntensity = 1.5f;
+        speed = 1.25f;
         lightGoingUp = true;
         tolerance = 0.3f;
         

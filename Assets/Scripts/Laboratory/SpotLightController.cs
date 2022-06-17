@@ -4,24 +4,30 @@ using UnityEngine;
 
 public class SpotLightController : MonoBehaviour
 {
-    private Light spotLight;
-    private Quaternion spotInitialRotation;
+    private GameObject alarm;
+    private AlarmController alarmController;
+    
     void Awake()
     {
-        spotLight = GetComponent<Light>();
+        alarm = GameObject.Find("Alarm");
+        alarmController = alarm.GetComponent<AlarmController>();
     }
     void Start()
     {
-       spotInitialRotation = transform.rotation;
+      
     }
 
     // Update is called once per frame
     void Update()
-    {
-        if(transform.rotation.x > 0.6f){
-            transform.Rotate(-Vector3.right);
-        }
+    {        
         
       
+    }
+    
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.name.Equals("Cyborg")){
+            alarmController.playerIsSpotted = true;  
+        }
     }
 }
