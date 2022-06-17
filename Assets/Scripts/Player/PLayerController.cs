@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
+
 public class PlayerController : MonoBehaviour, IPlayerController
 {
     public LayerMask ObstaclesLayerMask;
@@ -10,16 +12,19 @@ public class PlayerController : MonoBehaviour, IPlayerController
     public float movementCrouchSpeed = 1;
     private Rigidbody rb;
     private PlayerStates _playerState;
+    private PlayerStates _playerStateBefore;
     public PlayerStates PlayerState { get => _playerState; }
     private bool _isOnCrouchPosition;
     public bool IsOnCrouchPosition { get => _isOnCrouchPosition; }
     private int _indexCapsuleCollider = 0;
     private CapsuleCollider[] capsuleColliders;
     private Animator animator;
+    private HealthBehaviour healthBehaviour;
     void Start() {
         _playerState = PlayerStates._none;
         rb = gameObject.GetComponent<Rigidbody>();
         animator = gameObject.GetComponent<Animator>();
+        this.healthBehaviour = gameObject.GetComponent<HealthBehaviour>();
         capsuleColliders = this.GetComponents<CapsuleCollider>();
         capsuleColliders[0].enabled = true;
         if(capsuleColliders.Length > 1) {
@@ -39,7 +44,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
             _isOnCrouchPosition = false;
         }
         ///
-        
+
         /// colliders management depending on _isOnCrouchPosition
         if(capsuleColliders.Length > 1) {
             _indexCapsuleCollider = _isOnCrouchPosition ? 1 : 0;
@@ -65,23 +70,35 @@ public class PlayerController : MonoBehaviour, IPlayerController
             transform.Translate(movement * Time.deltaTime * speed);
         }
         ///
-        if(isMoving) {
-            _playerState = PlayerStates.walking;
-            if(_isOnCrouchPosition)
-                _playerState = PlayerStates.walkingCrouch;
+        var isAlive = IsAlive();
+        if(!isAlive.HasValue ) {
+            if(isMoving) {
+                _playerState = PlayerStates.walking;
+                if(_isOnCrouchPosition)
+                    _playerState = PlayerStates.walkingCrouch;
+            }
+            else {
+                _playerState = PlayerStates.idle;
+                if(_isOnCrouchPosition)
+                    _playerState = PlayerStates.idleCrouch;
+            }
         }
         else {
-            _playerState = PlayerStates.idle;
-            if(_isOnCrouchPosition)
-                _playerState = PlayerStates.idleCrouch;
+            _playerState = PlayerStates.dying;
         }
-
+        //
         animator.SetInteger("playerState", (int)_playerState);
+        if(_playerState == PlayerStates.dying && _playerStateBefore != PlayerStates.dying)
+            animator.SetTrigger("hasDead");
+        animator.SetBool("isCrouching", _isOnCrouchPosition);
+        _playerStateBefore = _playerState;
+        //
 
     }
 
-    CapsuleCollider GetActiveCollider() {
-        return capsuleColliders.FirstOrDefault(p => p.enabled);
+    private bool? IsAlive() {
+        bool? result =  this.healthBehaviour?.IsAlive;
+        return result;
     }
 
     public bool CollideWithWall(GameObject reference) {

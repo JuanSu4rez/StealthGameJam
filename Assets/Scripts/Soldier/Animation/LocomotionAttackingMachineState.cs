@@ -8,6 +8,7 @@ public class LocomotionAttackingMachineState : StateMachineBehaviour
         if(_soldierMachineState.AttackingState.AttackState == AttackingStatesValues.attacking
        ) {
             animator.SetTrigger("onPositionAttack");
+            _soldierMachineState.AttackingState.StartAttack();
         }
         else {
             _soldierMachineState.AttackingState.AttackState = AttackingStatesValues.chasing;
@@ -21,6 +22,7 @@ public class LocomotionAttackingMachineState : StateMachineBehaviour
            ) {
             _soldierMachineState.AttackingState.AttackState = AttackingStatesValues.attacking;
             animator.SetTrigger("onPositionAttack");
+            _soldierMachineState.AttackingState.StartAttack();
         }
 
     }
