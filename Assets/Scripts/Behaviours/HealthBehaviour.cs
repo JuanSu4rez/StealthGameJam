@@ -4,9 +4,10 @@ using System.Collections;
 public class HealthBehaviour : MonoBehaviour, IDamageable
 {
     [SerializeField]
-    private readonly float MaxHealth =100;
+    private float MaxHealth =100;
+    [SerializeField]
     private float Health;
-    public bool IsAlive { get; private set; }
+    public bool IsAlive { get => Health >= 0; }
     // Use this for initialization
     void Start() {
         this.enabled = false;
@@ -15,6 +16,5 @@ public class HealthBehaviour : MonoBehaviour, IDamageable
 
     public void ApplyDamage(float damage) {
         Health -= damage;
-        IsAlive = Health >= 0;
     }
 }

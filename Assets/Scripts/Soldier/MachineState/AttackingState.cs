@@ -35,8 +35,13 @@ public class AttackingState : MonoBehaviour, ISoldierState
 
     public void StartAttack() {
         weaponBehaviour = weapon?.GetComponent<IWeaponBehaviour>();
-        if(weaponBehaviour!= null) {
+        if(weaponBehaviour != null) {
             weaponBehaviour?.SetTarget(Player);
         }
+    }
+
+    public void OnDisable() {
+        //this can be called from any of the StateMachineBehaviour 
+        weaponBehaviour?.Disable();
     }
 }

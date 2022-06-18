@@ -23,6 +23,7 @@ public class ColliderController : MonoBehaviour
     }
     //Upon collision with another GameObject, this GameObject will reverse direction
     private void OnTriggerEnter(Collider other) {
+        Debug.Log("OnTriggerEnter colliderController");
         var onvisionCollider = false;
         if(other.name == "Cyborg") {
            var playerController =  other.GetComponent<IPlayerController>();
@@ -41,7 +42,7 @@ public class ColliderController : MonoBehaviour
 
                 var palyerisWalking = playerController.PlayerState == PlayerStates.walking ||
                                       playerController.PlayerState ==  PlayerStates.walkingCrouch;
-                //Debug.Log("OnTriggerEnter " + palyerisWalking);
+                Debug.Log("OnTriggerEnter " + palyerisWalking+" "+ playerController.PlayerState);
                 if(palyerisWalking) {
                    hearingController.HandleHearing(other);
                 }
@@ -49,6 +50,7 @@ public class ColliderController : MonoBehaviour
         }
     }
     void OnTriggerStay(Collider other) {
+        Debug.Log("OnTriggerEnter colliderController");
         var onvisionCollider = false;
         if(other.name == "Cyborg") {
             var playerController = other.GetComponent<IPlayerController>();
@@ -75,6 +77,7 @@ public class ColliderController : MonoBehaviour
         }
     }
     void OnTriggerExit(Collider other) {
+        Debug.Log("OnTriggerEnter colliderController");
         if(_soldierMachineState.ValidateState(SoldierStates.patrol)) {
             return;
         }

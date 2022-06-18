@@ -5,6 +5,7 @@ public interface IPlayerState{
     PlayerStates PlayerState { get;  }
 }
 
-public interface IPlayerController : IPlayerState {
+public interface IPlayerController : IPlayerState, IDisabler
+{
     bool IsOnCrouchPosition { get; }
 }

@@ -4,12 +4,15 @@ using System.Linq;
 using System;
 using System.Collections.Generic;
 
-public class SoilderMachineState : MonoBehaviour
+public class SoilderMachineState : MonoBehaviour, ISoldierState,IDisabler
 {
     public PatrolState PatrolState { get; set; }
     public AttackingState AttackingState { get; set; }
     public SearchingState SearchingState { get; set; }
     public LocoMotionState LocomotionState { get; set; }
+
+    public SoldierStates SoldierState { get => _soldierState();}
+
     protected MonoBehaviour currentState = null;
     // Use this for initialization
     void Start() {
@@ -23,7 +26,7 @@ public class SoilderMachineState : MonoBehaviour
     // Update is called once per frame
     void Update() {
     }
-    public SoldierStates SoldierState() {
+    public SoldierStates _soldierState() {
         return ( currentState as ISoldierState ).SoldierState;
     }
 
@@ -39,8 +42,12 @@ public class SoilderMachineState : MonoBehaviour
     }
 
     public bool ValidateState(SoldierStates state) {
-        return SoldierState() == state;
+        return SoldierState == state;
     }
 
-
+    public void Disable() {
+        this.enabled = false;
+        currentState.enabled = false;
+        this.gameObject.GetComponent<SoldierAnimationController>().Disable();
+    }
 }

@@ -36,6 +36,9 @@ public class PlayerController : MonoBehaviour, IPlayerController{
         MovePlayer();
     }
     void MovePlayer() {
+        if(_playerState == PlayerStates.dying) {
+            return;
+        }
         _playerState = PlayerStates.idle;
 
         /// shift button validation
@@ -78,19 +81,22 @@ public class PlayerController : MonoBehaviour, IPlayerController{
                 if( _isOnCrouchPosition ) {
                     _playerState = PlayerStates.walkingCrouch;
                     Debug.Log("STOP"); ;
-                    audioSource.Stop();
+                    if(audioSource != null)
+                    audioSource?.Stop();
                 }
                 else {
-                    if(!audioSource.isPlaying) {
+                    if(audioSource != null && !audioSource.isPlaying) {
                         Debug.Log("PLAYING");
-                        audioSource.Play();
+                        if(audioSource != null)
+                            audioSource?.Play();
                     }
                 }
             }
             else {
                 _playerState = PlayerStates.idle;
                 Debug.Log("STOP");
-                audioSource.Stop();
+                if(audioSource != null)
+                    audioSource?.Stop();
                 if( _isOnCrouchPosition )
                     _playerState = PlayerStates.idleCrouch;
             }
@@ -100,7 +106,7 @@ public class PlayerController : MonoBehaviour, IPlayerController{
         }
 
         animator.SetInteger("playerState", (int)_playerState);
-        if(_playerStateBefore != PlayerStates._none &&
+        if( _playerStateBefore != PlayerStates._none &&
             ( _playerState == PlayerStates.dying && _playerStateBefore != PlayerStates.dying )) { 
             animator.SetTrigger("hasDead");
         }
@@ -113,6 +119,7 @@ public class PlayerController : MonoBehaviour, IPlayerController{
     }
 
     private bool IsAlive() {
+        Debug.Log((this.healthBehaviour != null)+" is healthbeaviour");
         bool? result = this.healthBehaviour?.IsAlive;
         return result == null || result.Value;
     }
@@ -129,5 +136,10 @@ public class PlayerController : MonoBehaviour, IPlayerController{
             return true;
         }
         return false;
+    }
+
+    public void Disable() {
+        this.enabled = false;
+        this.animator.SetFloat("animationMultiplier", 0);
     }
 }

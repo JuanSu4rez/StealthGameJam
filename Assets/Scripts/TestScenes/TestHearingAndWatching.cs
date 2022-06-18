@@ -10,7 +10,7 @@ public class TestHearingAndWatching : MonoBehaviour
     void Start()
     {
        var _animator = Soldier.GetComponent<Animator>();
-        _animator.SetFloat("animationMutiplier", AnimationMutiplier);
+        _animator.SetFloat("animationMultiplier", AnimationMutiplier);
     }
 
     // Update is called once per frame
