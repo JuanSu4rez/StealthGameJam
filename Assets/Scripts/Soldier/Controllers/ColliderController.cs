@@ -8,18 +8,19 @@ public class ColliderController : MonoBehaviour
     private SphereCollider sphereCollider;
     private HearingController hearingController;
     private WatchingController watchingController;
-    private SoilderMachineState _soldierMachineState;
+    private SoldierMachineState _soldierMachineState;
+    
+
     // Start is called before the first frame update
     void Start() {
         visionCollider = this.GetComponent<MeshCollider>();
         sphereCollider = this.GetComponent<SphereCollider>();
         hearingController = this.GetComponent<HearingController>();
         watchingController = this.GetComponent<WatchingController>();
-        _soldierMachineState = this.GetComponent<SoilderMachineState>();
+        _soldierMachineState = this.GetComponent<SoldierMachineState>();
     }
     // Update is called once per frame
     void Update() {
-
     }
     //Upon collision with another GameObject, this GameObject will reverse direction
     private void OnTriggerEnter(Collider other) {
@@ -27,7 +28,6 @@ public class ColliderController : MonoBehaviour
         var onvisionCollider = false;
         if(other.name == "Cyborg") {            
            var playerController =  other.GetComponent<IPlayerController>();
-            Debug.Log("CYBORG IN RANGE TO BE HEARD : " + playerController.PlayerState);
             if(visionCollider != null) {
                 //Debug.Log("Is Vision Collider " + ( other.bounds == visionCollider.bounds ));
                 if(visionCollider.ClosestPointOnBounds(other.transform.position) == other.transform.position) {
@@ -43,7 +43,7 @@ public class ColliderController : MonoBehaviour
                 var playerIsRunning = playerController.PlayerState == PlayerStates.running;
                 Debug.Log("OnTriggerEnter " + playerIsRunning+" "+ playerController.PlayerState);
                 if(playerIsRunning) {
-                   hearingController.HandleHearing(other);
+                   hearingController.HandleHearing(other);                  
                 }
             }
         }

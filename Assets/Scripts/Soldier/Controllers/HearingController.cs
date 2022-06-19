@@ -4,12 +4,12 @@ using System;
 
 public class HearingController : MonoBehaviour, IHearingHandler
 {
-    private SoilderMachineState _soldierMachineState;
+    private SoldierMachineState _soldierMachineState;
    
 
     // Use this for initialization
     void Start() {
-        _soldierMachineState = this.GetComponent<SoilderMachineState>();
+        _soldierMachineState = this.GetComponent<SoldierMachineState>();
     }
 
     // Update is called once per frame
@@ -25,6 +25,7 @@ public class HearingController : MonoBehaviour, IHearingHandler
         _soldierMachineState.SearchingState.LookAt(collider.transform.position);
         _soldierMachineState.SetState(_soldierMachineState.SearchingState);
         //Debug.Log("OnSearchingState ");
+
     }
 
 }

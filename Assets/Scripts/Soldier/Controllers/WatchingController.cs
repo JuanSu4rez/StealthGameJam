@@ -4,13 +4,13 @@ using System.Linq;
 
 public class WatchingController : MonoBehaviour, IWatchingHandler
 {
-    private SoilderMachineState _soldierMachineState;
+    private SoldierMachineState _soldierMachineState;
     public LayerMask WallLayerMask;
     private int minmunDistance = 5;
     private CapsuleCollider _capsuleCollider;
     // Use this for initialization
     void Start() {
-        _soldierMachineState = this.GetComponent<SoilderMachineState>();
+        _soldierMachineState = this.GetComponent<SoldierMachineState>();
         var aux = this.GetComponents<Collider>().Select(p => p.GetType().FullName);
         Debug.Log(string.Join(";", aux.ToArray()));
         _capsuleCollider = this.GetComponent<CapsuleCollider>();

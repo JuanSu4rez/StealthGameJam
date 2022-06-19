@@ -4,7 +4,7 @@ using System.Linq;
 using System;
 using System.Collections.Generic;
 
-public class SoilderMachineState : MonoBehaviour, ISoldierState,IDisabler
+public class SoldierMachineState : MonoBehaviour, ISoldierState,IDisabler
 {
     public PatrolState PatrolState { get; set; }
     public AttackingState AttackingState { get; set; }

@@ -7,13 +7,13 @@ public class LocomotionPatrolMachineState : StateMachineBehaviour
     void Start() {
     }
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-        var _soldierMachineState = animator.transform.GetComponent<SoilderMachineState>();
+        var _soldierMachineState = animator.transform.GetComponent<SoldierMachineState>();
         var position = _soldierMachineState.PatrolState.NextPosition();
         _soldierMachineState.LocomotionState.SetDestiny(position);
         animator.SetInteger("patrolState", (int)_soldierMachineState.PatrolState.PatrolStateValue);
     }
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-        var _soldierMachineState = animator.transform.GetComponent<SoilderMachineState>(); ;
+        var _soldierMachineState = animator.transform.GetComponent<SoldierMachineState>(); ;
         if(
             _soldierMachineState.PatrolState.PatrolStateValue == PatrolStates.locomotion &&!_soldierMachineState.LocomotionState.enabled
             ) {
