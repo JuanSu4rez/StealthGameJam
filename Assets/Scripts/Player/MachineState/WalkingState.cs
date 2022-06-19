@@ -3,7 +3,7 @@ using System.Collections;
 
 public class WalkingState : MonoBehaviour , IPlayerState
 {
-    public PlayerStates PlayerState {  get => PlayerStates.walking; }
+    public PlayerStates PlayerState {  get => PlayerStates.running; }
 
     // Use this for initialization
     void Start() {

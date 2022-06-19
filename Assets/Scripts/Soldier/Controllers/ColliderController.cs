@@ -23,11 +23,11 @@ public class ColliderController : MonoBehaviour
     }
     //Upon collision with another GameObject, this GameObject will reverse direction
     private void OnTriggerEnter(Collider other) {
-        Debug.Log("OnTriggerEnter colliderController");
+        //Debug.Log("OnTriggerEnter colliderController");
         var onvisionCollider = false;
-        if(other.name == "Cyborg") {
+        if(other.name == "Cyborg") {            
            var playerController =  other.GetComponent<IPlayerController>();
-
+            Debug.Log("CYBORG IN RANGE TO BE HEARD : " + playerController.PlayerState);
             if(visionCollider != null) {
                 //Debug.Log("Is Vision Collider " + ( other.bounds == visionCollider.bounds ));
                 if(visionCollider.ClosestPointOnBounds(other.transform.position) == other.transform.position) {
@@ -40,17 +40,16 @@ public class ColliderController : MonoBehaviour
             }
             else {
 
-                var palyerisWalking = playerController.PlayerState == PlayerStates.walking ||
-                                      playerController.PlayerState ==  PlayerStates.walkingCrouch;
-                Debug.Log("OnTriggerEnter " + palyerisWalking+" "+ playerController.PlayerState);
-                if(palyerisWalking) {
+                var playerIsRunning = playerController.PlayerState == PlayerStates.running;
+                Debug.Log("OnTriggerEnter " + playerIsRunning+" "+ playerController.PlayerState);
+                if(playerIsRunning) {
                    hearingController.HandleHearing(other);
                 }
             }
         }
     }
     void OnTriggerStay(Collider other) {
-        Debug.Log("OnTriggerEnter colliderController");
+        //Debug.Log("OnTriggerEnter colliderController");
         var onvisionCollider = false;
         if(other.name == "Cyborg") {
             var playerController = other.GetComponent<IPlayerController>();
@@ -67,17 +66,16 @@ public class ColliderController : MonoBehaviour
             }
             else {
 
-                var palyerisWalking = playerController.PlayerState == PlayerStates.walking ||
-                                      playerController.PlayerState == PlayerStates.walkingCrouch;
+                var playerIsRunning = playerController.PlayerState == PlayerStates.running;
                 //Debug.Log("OnTriggerEnter " + palyerisWalking);
-                if(palyerisWalking) {
+                if(playerIsRunning) {
                     hearingController.HandleHearing(other);
                 }
             }
         }
     }
     void OnTriggerExit(Collider other) {
-        Debug.Log("OnTriggerEnter colliderController");
+        //Debug.Log("OnTriggerEnter colliderController");
         if(_soldierMachineState.ValidateState(SoldierStates.patrol)) {
             return;
         }

@@ -655,7 +655,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6812749, y: 1}
+    m_SensorSize: {x: 2.169059, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -672,7 +672,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 735180864}
   m_LocalRotation: {x: 0.53729963, y: 0, z: 0, w: 0.8433915}
-  m_LocalPosition: {x: -6.104216, y: 9.514612, z: 17.61682}
+  m_LocalPosition: {x: -9.004216, y: 9.514612, z: 50.086826}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -909,7 +909,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.53729963, y: 0, z: 0, w: 0.8433915}
-  m_LocalPosition: {x: -6.104216, y: 9.514612, z: 17.61682}
+  m_LocalPosition: {x: -9.004216, y: 9.514612, z: 50.086826}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2665,7 +2665,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3803202741995973710, guid: e076e8bddf98330e097284f01f04b3f0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.7
+      value: -18
       objectReference: {fileID: 0}
     - target: {fileID: 3803202741995973710, guid: e076e8bddf98330e097284f01f04b3f0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3650,7 +3650,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 6be06c808a8c65aa3ab0a412c3acf297, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -3809,7 +3809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7128952475678112165, guid: 0085aa577b26d3eb4977e5a0c33a4e67, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.05
+      value: -8.95
       objectReference: {fileID: 0}
     - target: {fileID: 7128952475678112165, guid: 0085aa577b26d3eb4977e5a0c33a4e67, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3817,7 +3817,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7128952475678112165, guid: 0085aa577b26d3eb4977e5a0c33a4e67, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 21.79
+      value: 54.26
       objectReference: {fileID: 0}
     - target: {fileID: 7128952475678112165, guid: 0085aa577b26d3eb4977e5a0c33a4e67, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3851,6 +3851,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7306415278456044449, guid: 0085aa577b26d3eb4977e5a0c33a4e67, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 20ae68f045c31f047ad82be91b5c049b, type: 2}
     - target: {fileID: 7612473350117335839, guid: 0085aa577b26d3eb4977e5a0c33a4e67, type: 3}
       propertyPath: m_Name
       value: Cyborg

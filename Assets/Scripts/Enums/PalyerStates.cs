@@ -6,7 +6,7 @@ public enum PlayerStates
     _none,
     idle,
     idleCrouch,
-    walking,
+    running,
     walkingCrouch,
     dying,
 }

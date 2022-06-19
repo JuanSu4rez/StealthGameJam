@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour, IPlayerController{
         //Debug.Log($"IsOnCrouchPosition {_isOnCrouchPosition}");
         var isMoving = Input.GetButton("Vertical") || Input.GetButton("Horizontal");
         if(isMoving) {
-            _playerState = PlayerStates.walking;
+            _playerState = PlayerStates.running;
             float verticalInput = Input.GetAxis("Vertical");
             float horizontalInput = Input.GetAxis("Horizontal");
             var vector2 = new Vector2(-horizontalInput, verticalInput);
@@ -77,16 +77,16 @@ public class PlayerController : MonoBehaviour, IPlayerController{
         var isAlive = IsAlive();
         if( isAlive ) {
             if( isMoving ) {
-                _playerState = PlayerStates.walking;
+                _playerState = PlayerStates.running;
                 if( _isOnCrouchPosition ) {
                     _playerState = PlayerStates.walkingCrouch;
-                    Debug.Log("STOP"); ;
+                    //Debug.Log("STOP"); ;
                     if(audioSource != null)
                     audioSource?.Stop();
                 }
                 else {
                     if(audioSource != null && !audioSource.isPlaying) {
-                        Debug.Log("PLAYING");
+                        //Debug.Log("PLAYING");
                         if(audioSource != null)
                             audioSource?.Play();
                     }
@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour, IPlayerController{
             }
             else {
                 _playerState = PlayerStates.idle;
-                Debug.Log("STOP");
+                //Debug.Log("STOP");
                 if(audioSource != null)
                     audioSource?.Stop();
                 if( _isOnCrouchPosition )
@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour, IPlayerController{
     }
 
     private bool IsAlive() {
-        Debug.Log((this.healthBehaviour != null)+" is healthbeaviour");
+        //Debug.Log((this.healthBehaviour != null)+" is healthbeaviour");
         bool? result = this.healthBehaviour?.IsAlive;
         return result == null || result.Value;
     }
