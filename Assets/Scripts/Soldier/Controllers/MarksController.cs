@@ -11,6 +11,7 @@ public class MarksController : MonoBehaviour
     void Start() {
         if(MarksPrefab)
             marks = Instantiate(MarksPrefab, MarksPrefab.transform.position, MarksPrefab.transform.rotation);
+            marks.SetActive(false);
         _soldierMachineState = this.GetComponent<SoldierMachineState>();
     }
 
@@ -28,7 +29,7 @@ public class MarksController : MonoBehaviour
 
     void Searching() {
         if(marks) {
-            marks.gameObject.SetActive(true);
+            marks.SetActive(true);
             marks.transform.GetChild(0).gameObject.SetActive(false);
             marks.transform.GetChild(1).gameObject.SetActive(false);
             marks.transform.GetChild(2).gameObject.SetActive(true);
@@ -38,7 +39,7 @@ public class MarksController : MonoBehaviour
 
     void Attacking() {
         if(marks) {
-            marks.gameObject.SetActive(true);
+            marks.SetActive(true);
             marks.transform.GetChild(0).gameObject.SetActive(true);
             marks.transform.GetChild(1).gameObject.SetActive(false);
             marks.transform.GetChild(2).gameObject.SetActive(false);
@@ -48,7 +49,7 @@ public class MarksController : MonoBehaviour
 
     void ReturnToPatrol() {
         if(marks) {
-            marks.gameObject.SetActive(true);
+            marks.SetActive(true);
             marks.transform.GetChild(0).gameObject.SetActive(false);
             marks.transform.GetChild(1).gameObject.SetActive(true);
             marks.transform.GetChild(2).gameObject.SetActive(false);

@@ -5,9 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    private AudioSource audioSource;
+    public AudioClip escapeSong;
     public static GameController Instance = null;
     public bool gameOver = false;
-    private GameObject Player;
+    private GameObject Player;    
+    public bool playerIsSeen;
+    public float lasTimePlayerWasSeen;
+
     public AIEnemiesController _aiEnemiesController = null;
     public AIEnemiesController AIEnemiesController {
         get => _aiEnemiesController;
@@ -24,6 +29,7 @@ public class GameController : MonoBehaviour
         else{
             Destroy(this);
         }
+        audioSource = GetComponent<AudioSource>();
     }
 
     internal void DeadNotification(GameObject gameObject) {
@@ -50,6 +56,10 @@ public class GameController : MonoBehaviour
             Disable();
         
         }
+        if(playerIsSeen){
+            PlayEscapeSong();
+        } else {
+            StopEscapeSong();}
     }
     void Disable() {
        // this.enabled = false;
@@ -58,5 +68,19 @@ public class GameController : MonoBehaviour
         ////Debug.Log("LoadScene call");
         SceneManager.LoadScene(Scenes.SampleScene.ToString());
     }
+
+    public void PlayEscapeSong(){
+        audioSource.clip = escapeSong;
+        if(!audioSource.isPlaying){
+            audioSource.Play();
+        }
+    }
+
+    public void StopEscapeSong(){
+        audioSource.clip = escapeSong;
+        audioSource.Stop();
+    }
+
+   
 
 }

@@ -15,9 +15,15 @@ public class AlarmController : MonoBehaviour
     private float tolerance;
     private AudioSource audioSource;
     public AudioClip alarmSound;
-    public bool playerIsSpotted;
+    //public bool playerIsSpotted;
     private bool coroutineFlag = false; 
     private IEnumerator alarmCoroutine;
+
+    public float alertStateDuration = 10;
+
+    private float lastTimePlayerWasSeen;
+
+    private GameController gameControllerScript;
     void Awake()
     {
         light = alarmLight.GetComponent<Light>();
@@ -32,27 +38,32 @@ public class AlarmController : MonoBehaviour
         lightGoingUp = true;
         tolerance = 0.3f;
         alarmCoroutine = AlarmCoroutine();
-
+        gameControllerScript = GameObject.Find("GameController").GetComponent<GameController>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(playerIsSpotted && !coroutineFlag) {
-            // turnOnAlarm();
-            StartCoroutine(alarmCoroutine);
-        }
-        else{
-           // turnOffAlarm();
-        }
+        //if(gameControllerScript.playerIsSeen && !coroutineFlag) {
+         //    turnOnAlarm();
+            //StartCoroutine(alarmCoroutine);
+        //}
+        if(gameControllerScript.playerIsSeen){            
+            turnOnAlarm();
+            if( Time.realtimeSinceStartup - gameControllerScript.lasTimePlayerWasSeen > alertStateDuration){
+                gameControllerScript.playerIsSeen = false;
+                turnOffAlarm();
+            }           
+        }       
     }
 
     IEnumerator AlarmCoroutine() {
         coroutineFlag = true;
         turnOnAlarm();
         yield return new WaitForSeconds(10);
-        turnOffAlarm();
+        gameControllerScript.playerIsSeen = false;
+        turnOffAlarm();        
         coroutineFlag = false;
 
     }
@@ -61,6 +72,7 @@ public class AlarmController : MonoBehaviour
         light.color = originalColor;
         light.intensity = originalIntensity;
         audioSource.Stop();
+        gameControllerScript.StopEscapeSong();
     }
 
     void turnOnAlarm(){
@@ -83,7 +95,7 @@ public class AlarmController : MonoBehaviour
         }
         if(!audioSource.isPlaying){
             audioSource.PlayOneShot(alarmSound);
-        }        
+        }    
     }
      void OnDisable() {
         StopCoroutine(alarmCoroutine);

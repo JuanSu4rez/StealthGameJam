@@ -13,7 +13,7 @@ public class LocomotionPatrolMachineState : StateMachineBehaviour
             _soldierMachineState.LocomotionState.SetDestiny(position.Value);
             var soundsController = animator.transform.GetComponent<SoundsController>();
             if(soundsController) {
-                soundsController.PlaySound();
+                soundsController.PlayWalkingSound();
             }
             animator.SetInteger("patrolState", (int)_soldierMachineState.PatrolState.PatrolStateValue);
         }
@@ -34,7 +34,7 @@ public class LocomotionPatrolMachineState : StateMachineBehaviour
         var _soldierMachineState = animator.transform.GetComponent<SoldierMachineState>();
         var soundsController = animator.transform.GetComponent<SoundsController>();
         if(soundsController) {
-            soundsController.StopSound();
+            soundsController.StopWalkingSound();
         }
     }
 }

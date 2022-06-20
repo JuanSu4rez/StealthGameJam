@@ -6,11 +6,13 @@ public class SpotLightController : MonoBehaviour
 {
     private GameObject alarm;
     private AlarmController alarmController;
+    public GameController gameControllerScript;
     
     void Awake()
     {
         alarm = GameObject.Find("Alarm");
         alarmController = alarm.GetComponent<AlarmController>();
+        gameControllerScript = GameObject.Find("GameController").GetComponent<GameController>();
     }
     void Start()
     {
@@ -26,8 +28,9 @@ public class SpotLightController : MonoBehaviour
     
     void OnTriggerEnter(Collider other)
     {
-        if(other.name.Equals("Cyborg")){
-            alarmController.playerIsSpotted = true;
+        if(other.name.Equals("Cyborg")){            
+            gameControllerScript.playerIsSeen = true;
+            gameControllerScript.lasTimePlayerWasSeen = Time.realtimeSinceStartup;
             GameController.Instance.AIEnemiesController.PlayerIsSpotted(other.gameObject);
         }
     }

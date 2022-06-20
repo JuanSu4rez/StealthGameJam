@@ -5,19 +5,20 @@ public class LocomotionAttackingMachineState : StateMachineBehaviour
 {
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         var _soldierMachineState = animator.transform.GetComponent<SoldierMachineState>();
+        var soundsController = animator.transform.GetComponent<SoundsController>();
 
         if(_soldierMachineState.AttackingState.AttackState == AttackingStatesValues.attacking) {
             StopChasing(animator, ref _soldierMachineState);
+            soundsController.PlayMachineGunSound();
         }
         else {
 
             float movingVelocity = 4;
             _soldierMachineState.AttackingState.AttackState = AttackingStatesValues.chasing;
             _soldierMachineState.LocomotionState.SetDestiny(_soldierMachineState.AttackingState.PointToGo.Value, movingVelocity);
-            animator.SetInteger("attackState", (int)_soldierMachineState.AttackingState.AttackState);
-            var soundsController = animator.transform.GetComponent<SoundsController>();
+            animator.SetInteger("attackState", (int)_soldierMachineState.AttackingState.AttackState);            
             if(soundsController) {
-                soundsController.PlaySound();
+                soundsController.PlayWalkingSound();
             }
         }
     }
@@ -53,6 +54,8 @@ public class LocomotionAttackingMachineState : StateMachineBehaviour
         }
         animator.SetTrigger("onPositionAttack");
         _soldierMachineState.AttackingState.StartAttack();
+        var soundsController = animator.transform.GetComponent<SoundsController>();
+        soundsController.PlayMachineGunSound();
     }
 
 }
