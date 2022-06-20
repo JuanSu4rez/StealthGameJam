@@ -5,11 +5,12 @@ using UnityEngine;
 public class MarksController : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject marks;
+    public GameObject MarksPrefab;
+    private GameObject marks;
     private SoldierMachineState _soldierMachineState;
     void Start() {
-        if(marks)
-            marks.SetActive(false);
+        if(MarksPrefab)
+            marks = Instantiate(MarksPrefab, MarksPrefab.transform.position, MarksPrefab.transform.rotation);
         _soldierMachineState = this.GetComponent<SoldierMachineState>();
     }
 

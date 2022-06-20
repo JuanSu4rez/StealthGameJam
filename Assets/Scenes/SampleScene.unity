@@ -932,7 +932,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.9033613, y: 1}
+    m_SensorSize: {x: 2.3935018, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -973,6 +973,14 @@ PrefabInstance:
       propertyPath: Frecuency
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 5878307225970064884, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
+      propertyPath: marks
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5878307225970064884, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
+      propertyPath: MarksPrefab
+      value: 
+      objectReference: {fileID: 1103611973}
     - target: {fileID: 5878307225970064890, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
       propertyPath: pointsContainer
       value: 
@@ -2883,6 +2891,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 141aa71b2eaeec29abd646243516f8d3, type: 3}
+--- !u!1 &1103611973 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7492dc1a9c5ad92a2a261eb70909d594, type: 3}
+  m_PrefabInstance: {fileID: 448322565}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1134430381
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2959,6 +2972,14 @@ PrefabInstance:
       propertyPath: Frecuency
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 5878307225970064884, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
+      propertyPath: marks
+      value: 
+      objectReference: {fileID: 1103611973}
+    - target: {fileID: 5878307225970064884, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
+      propertyPath: MarksPrefab
+      value: 
+      objectReference: {fileID: 1103611973}
     - target: {fileID: 5878307225970064890, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
       propertyPath: pointsContainer
       value: 

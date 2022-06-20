@@ -18,7 +18,7 @@ public class PatrolState : MonoBehaviour, ISoldierState
         if(pointsContainer) { 
         _positionsToPatrol = pointsContainer.Cast<Transform>().ToArray();
         }
-        IndexPosition = -1;
+        IndexPosition = 0;
     }
 
     public void NextPosition() {
@@ -31,7 +31,7 @@ public class PatrolState : MonoBehaviour, ISoldierState
         }
         PatrolStateValue = PatrolStates.locomotion;
     
-        return _positionsToPatrol[IndexPosition].position;
+        return _positionsToPatrol[IndexPosition % _positionsToPatrol.Length].position;
     }
 
     public bool IsPatrolSateSetUp() {
