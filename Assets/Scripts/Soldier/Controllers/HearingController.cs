@@ -23,8 +23,8 @@ public class HearingController : MonoBehaviour, IHearingHandler
         }
         var angle = Vector3.SignedAngle(this.transform.forward, collider.transform.position, Vector3.up);
         _soldierMachineState.SearchingState.LookAt(collider.transform.position);
-        _soldierMachineState.SetState(_soldierMachineState.SearchingState);
-        //Debug.Log("OnSearchingState ");
+        //_soldierMachineState.SetState(_soldierMachineState.SearchingState);
+        ////Debug.Log("OnSearchingState ");
 
     }
 

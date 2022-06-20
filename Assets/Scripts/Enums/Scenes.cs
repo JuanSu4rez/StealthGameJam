@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public interface IDisabler{
-    void Disable();
+public enum Scenes{
+    SampleScene
 }
+

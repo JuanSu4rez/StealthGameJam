@@ -1,31 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum SoldierStates
-{
+public enum SoldierStates{
     _none,
     attacking,
     patrol,
     searching
 }
 
-public enum PatrolStates
-{
+public enum PatrolStates{
     _none,
     locomotion,
     inspecting
 }
 
-public enum AttackingStatesValues
-{
+public enum AttackingStatesValues{
     _none,
     chasing,
     attacking
 }
 
 
-public enum SoldierAnimationStates
-{
+public enum SoldierAnimationStates{
     _none,
     idle,
     firing,

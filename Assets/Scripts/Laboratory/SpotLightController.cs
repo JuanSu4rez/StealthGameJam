@@ -27,7 +27,8 @@ public class SpotLightController : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if(other.name.Equals("Cyborg")){
-            alarmController.playerIsSpotted = true;  
+            alarmController.playerIsSpotted = true;
+            GameController.Instance.AIEnemiesController.PlayerIsSpotted(other.gameObject);
         }
     }
 }

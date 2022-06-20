@@ -14,12 +14,15 @@ public class SoldierAnimationController : MonoBehaviour
     // Update is called once per frame
     void Update() {
 
-        
+
 
         var soldierState = _soldierMachineState.SoldierState;
-        if(soldierState != lastState )
+        if(soldierState != lastState)
             _animator.SetInteger("state", (int)soldierState);
         lastState = soldierState;
+
+        if(soldierState == SoldierStates.patrol)
+            _animator.SetInteger("patrolState", (int)_soldierMachineState.PatrolState.PatrolStateValue);
     }
 
 

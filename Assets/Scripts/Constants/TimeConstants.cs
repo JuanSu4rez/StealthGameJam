@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public interface INPC 
-{
-    
+public class TimeConstants{
+
+   
 }

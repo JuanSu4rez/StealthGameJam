@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,14 +15,27 @@ public class PatrolState : MonoBehaviour, ISoldierState
     private Transform[] _positionsToPatrol;
     private bool HasStarted = false;
     void Start() {
+        if(pointsContainer) { 
         _positionsToPatrol = pointsContainer.Cast<Transform>().ToArray();
+        }
         IndexPosition = -1;
-        this.enabled = false;
     }
 
-    public Vector3 NextPosition() {
-        PatrolStateValue = PatrolStates.locomotion;
+    public void NextPosition() {
         IndexPosition = ( IndexPosition + 1 ) % _positionsToPatrol.Length;
+    }
+
+    public Vector3? GetPosition() {
+        if(!IsPatrolSateSetUp()) {
+            return null;
+        }
+        PatrolStateValue = PatrolStates.locomotion;
+    
         return _positionsToPatrol[IndexPosition].position;
     }
+
+    public bool IsPatrolSateSetUp() {
+        return pointsContainer!= null;
+    }
+
 }

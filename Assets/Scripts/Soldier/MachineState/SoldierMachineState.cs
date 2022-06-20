@@ -10,9 +10,8 @@ public class SoldierMachineState : MonoBehaviour, ISoldierState,IDisabler
     public AttackingState AttackingState { get; set; }
     public SearchingState SearchingState { get; set; }
     public LocoMotionState LocomotionState { get; set; }
-
     public SoldierStates SoldierState { get => _soldierState();}
-
+    public Boolean PlayerIsAlive { get => PlayerConstants.IsAlive; }
     protected MonoBehaviour currentState = null;
     // Use this for initialization
     void Start() {
@@ -25,14 +24,26 @@ public class SoldierMachineState : MonoBehaviour, ISoldierState,IDisabler
     }
     // Update is called once per frame
     void Update() {
+        if(_soldierState() == SoldierStates.patrol) {
+            if(LocomotionState.enabled && PatrolState.PatrolStateValue == PatrolStates.inspecting) {
+                Debug.Log("!ERROR!!!!! Enabled but inspecting");
+                PatrolState.PatrolStateValue = PatrolStates.locomotion;
+            }
+        }
     }
     public SoldierStates _soldierState() {
         return ( currentState as ISoldierState ).SoldierState;
     }
 
     public void SetState<T>(T newState) where T : MonoBehaviour, ISoldierState {
-        if(LocomotionState) {
-            LocomotionState.DisableLocomotion();
+        if(newState == currentState) {
+            Debug.Log("!ERROR!!!!! NEW STATE CAN NOT BE SAME AS THE CURRENT STATE ");
+            Debug.Log(newState.GetType().FullName);
+            Debug.Log("!ERROR!!!!! ");
+        }
+
+        if(newState !=  LocomotionState && LocomotionState) {
+            LocomotionState.Stop();
         }
         if(currentState)
             currentState.enabled = false;
@@ -49,5 +60,19 @@ public class SoldierMachineState : MonoBehaviour, ISoldierState,IDisabler
         this.enabled = false;
         currentState.enabled = false;
         this.gameObject.GetComponent<SoldierAnimationController>().Disable();
+    }
+
+    public bool IsWalking() {
+        bool iswaking = false;
+        switch(currentState) {
+
+            case AttackingState attacking:
+                iswaking = attacking.AttackState == AttackingStatesValues.chasing;
+                break;
+            case PatrolState patrol:
+                iswaking = patrol.PatrolStateValue == PatrolStates.locomotion;
+                break;
+        }
+        return iswaking;
     }
 }

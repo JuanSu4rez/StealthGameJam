@@ -22,11 +22,13 @@ public class SearchingState : MonoBehaviour, ISoldierState
             counter  = 1;
             transform.LookAt(_position);
             rotating = false;
+            enabled = false;
         }
     }
 
     internal void LookAt(Vector3 position) {
         _position = position;
         rotating = true;
+        enabled = true;
     }
 }

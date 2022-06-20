@@ -16,7 +16,8 @@ public class AlarmController : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip alarmSound;
     public bool playerIsSpotted;
-
+    private bool coroutineFlag = false; 
+    private IEnumerator alarmCoroutine;
     void Awake()
     {
         light = alarmLight.GetComponent<Light>();
@@ -30,18 +31,30 @@ public class AlarmController : MonoBehaviour
         speed = 1.25f;
         lightGoingUp = true;
         tolerance = 0.3f;
-        
+        alarmCoroutine = AlarmCoroutine();
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(playerIsSpotted){
-            turnOnAlarm();
+        if(playerIsSpotted && !coroutineFlag) {
+            // turnOnAlarm();
+            StartCoroutine(alarmCoroutine);
         }
         else{
-            turnOffAlarm();
+           // turnOffAlarm();
         }
+    }
+
+    IEnumerator AlarmCoroutine() {
+        coroutineFlag = true;
+        turnOnAlarm();
+        yield return new WaitForSeconds(10);
+        turnOffAlarm();
+        coroutineFlag = false;
+
     }
 
     void turnOffAlarm(){
@@ -72,7 +85,9 @@ public class AlarmController : MonoBehaviour
             audioSource.PlayOneShot(alarmSound);
         }        
     }
+     void OnDisable() {
+        StopCoroutine(alarmCoroutine);
+    }
 
-   
 
 }

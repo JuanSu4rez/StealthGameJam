@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,42 +25,35 @@ public class ColliderController : MonoBehaviour
     }
     //Upon collision with another GameObject, this GameObject will reverse direction
     private void OnTriggerEnter(Collider other) {
-        //Debug.Log("OnTriggerEnter colliderController");
-        var onvisionCollider = false;
-        if(other.name == "Cyborg") {            
-           var playerController =  other.GetComponent<IPlayerController>();
-            if(visionCollider != null) {
-                //Debug.Log("Is Vision Collider " + ( other.bounds == visionCollider.bounds ));
-                if(visionCollider.ClosestPointOnBounds(other.transform.position) == other.transform.position) {
-                    //Debug.Log(other.name + " IS ON vision range");
-                    onvisionCollider = true;
-                }
-            }
-            if(onvisionCollider) {
-                watchingController.HandleWatching(other);
-            }
-            else {
-
-                var playerIsRunning = playerController.PlayerState == PlayerStates.running;
-                Debug.Log("OnTriggerEnter " + playerIsRunning+" "+ playerController.PlayerState);
-                if(playerIsRunning) {
-                   hearingController.HandleHearing(other);                  
-                }
-            }
-        }
+        ////Debug.Log("OnTriggerEnter colliderController");
+        HandleTrigger(other);
     }
+
+
+
     void OnTriggerStay(Collider other) {
-        //Debug.Log("OnTriggerEnter colliderController");
+        ////Debug.Log("OnTriggerEnter colliderController");
+        HandleTrigger(other);
+    }
+
+
+
+    public bool IsOnVisionRange(GameObject gameObject) {
+        if(visionCollider.ClosestPointOnBounds(gameObject.transform.position) == gameObject.transform.position) {
+            ////Debug.Log(other.name + " IS ON vision range");
+            return true;
+        }
+        return false;
+    }
+
+    private void HandleTrigger(Collider other) {
         var onvisionCollider = false;
         if(other.name == "Cyborg") {
             var playerController = other.GetComponent<IPlayerController>();
-
             if(visionCollider != null) {
-                //Debug.Log("Is Vision Collider " + ( other.bounds == visionCollider.bounds ));
-                if(visionCollider.ClosestPointOnBounds(other.transform.position) == other.transform.position) {
-                    //Debug.Log(other.name + " IS ON vision range Stay");
-                    onvisionCollider = true;
-                }
+                ////Debug.Log("Is Vision Collider " + ( other.bounds == visionCollider.bounds ));
+                onvisionCollider = IsOnVisionRange(other.transform.gameObject);
+
             }
             if(onvisionCollider) {
                 watchingController.HandleWatching(other);
@@ -67,22 +61,11 @@ public class ColliderController : MonoBehaviour
             else {
 
                 var playerIsRunning = playerController.PlayerState == PlayerStates.running;
-                //Debug.Log("OnTriggerEnter " + palyerisWalking);
+                ////Debug.Log("OnTriggerEnter " + playerIsRunning+" "+ playerController.PlayerState);
                 if(playerIsRunning) {
                     hearingController.HandleHearing(other);
                 }
             }
-        }
-    }
-    void OnTriggerExit(Collider other) {
-        //Debug.Log("OnTriggerEnter colliderController");
-        if(_soldierMachineState.ValidateState(SoldierStates.patrol)) {
-            return;
-        }
-        if(other.name == "Cyborg") {
-            //Debug.Log("OnTriggerExit");
-            _soldierMachineState.PatrolState.PatrolStateValue = PatrolStates.locomotion;
-            _soldierMachineState.SetState(_soldierMachineState.PatrolState);
         }
     }
 }

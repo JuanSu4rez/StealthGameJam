@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HealthBehaviour : MonoBehaviour, IDamageable
-{
+public class HealthBehaviour : MonoBehaviour, IDamageable{
     [SerializeField]
     private float MaxHealth =100;
     [SerializeField]

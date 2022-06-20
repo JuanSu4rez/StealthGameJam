@@ -1,5 +1,51 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1415966832
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1415966833}
+  - component: {fileID: 1415966834}
+  m_Layer: 0
+  m_Name: Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1415966833
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415966832}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.36, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6888616983367725581}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1415966834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415966832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1428b75b253f7bb49bd07e40a0423459, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 1
+  Frecuency: 0
 --- !u!1 &50287234917572280
 GameObject:
   m_ObjectHideFlags: 0
@@ -1674,6 +1720,7 @@ Transform:
   m_Children:
   - {fileID: 2533729940595073683}
   - {fileID: 2079589509346843573}
+  - {fileID: 1415966833}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1786,7 +1833,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6112114815259076791}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 270a5956f66c4fc43be23503179a3ae3, type: 3}
+  m_Script: {fileID: 11500000, guid: 835161a96949cfb8588add52e7537ac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &6346682223844677035
@@ -1827,6 +1874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a5f42ba7043b448b0402ac98d76f9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weapon: {fileID: 1415966832}
 --- !u!114 &6346682223844677010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1863,9 +1911,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43a1717b274d951419316accea31622f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LayerMask:
+  WallLayerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
 --- !u!114 &6346682223844677023
 MonoBehaviour:
   m_ObjectHideFlags: 0

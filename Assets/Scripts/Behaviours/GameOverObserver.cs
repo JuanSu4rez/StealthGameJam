@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameOverObserver : MonoBehaviour
-{
+public class GameOverObserver : MonoBehaviour{
 
     // Use this for initialization
     void Start() {

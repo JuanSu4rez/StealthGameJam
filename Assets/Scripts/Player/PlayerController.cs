@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour, IPlayerController{
 
         ///Movement
         var speed = _isOnCrouchPosition ? movementCrouchSpeed : movementSpeed;
-        //Debug.Log($"IsOnCrouchPosition {_isOnCrouchPosition}");
+        ////Debug.Log($"IsOnCrouchPosition {_isOnCrouchPosition}");
         var isMoving = Input.GetButton("Vertical") || Input.GetButton("Horizontal");
         if(isMoving) {
             _playerState = PlayerStates.running;
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour, IPlayerController{
             float horizontalInput = Input.GetAxis("Horizontal");
             var vector2 = new Vector2(-horizontalInput, verticalInput);
             var angle = Vector2.SignedAngle(Vector2.up, vector2);
-            //Debug.Log(angle + " " + vector2);
+            ////Debug.Log(angle + " " + vector2);
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
             var movement = ( transform.forward * verticalInput ) +
                            ( transform.right * -horizontalInput );
@@ -80,13 +80,13 @@ public class PlayerController : MonoBehaviour, IPlayerController{
                 _playerState = PlayerStates.running;
                 if( _isOnCrouchPosition ) {
                     _playerState = PlayerStates.walkingCrouch;
-                    //Debug.Log("STOP"); ;
+                    ////Debug.Log("STOP"); ;
                     if(audioSource != null)
                     audioSource?.Stop();
                 }
                 else {
                     if(audioSource != null && !audioSource.isPlaying) {
-                        //Debug.Log("PLAYING");
+                        ////Debug.Log("PLAYING");
                         if(audioSource != null)
                             audioSource?.Play();
                     }
@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour, IPlayerController{
             }
             else {
                 _playerState = PlayerStates.idle;
-                //Debug.Log("STOP");
+                ////Debug.Log("STOP");
                 if(audioSource != null)
                     audioSource?.Stop();
                 if( _isOnCrouchPosition )
@@ -118,19 +118,21 @@ public class PlayerController : MonoBehaviour, IPlayerController{
         return capsuleColliders.FirstOrDefault(p => p.enabled);
     }
 
-    private bool IsAlive() {
-        //Debug.Log((this.healthBehaviour != null)+" is healthbeaviour");
+    public bool IsAlive() {
+        ////Debug.Log((this.healthBehaviour != null)+" is healthbeaviour");
         bool? result = this.healthBehaviour?.IsAlive;
         return result == null || result.Value;
     }
 
-    public bool CollideWithWall(GameObject reference) {
+    public bool CollideWithObstacle(GameObject reference) {
         var _origin = origin.transform.position;
         var gopos = reference.transform.position;
         var distance = reference.transform.position - origin.transform.position;
         Debug.DrawLine(gopos, _origin, Color.green);
-        RaycastHit[] hits = Physics.RaycastAll(_origin, ( distance ).normalized, distance.magnitude, ObstaclesLayerMask);
-        if(hits.Length > 0) {
+        RaycastHit[] hits = Physics.RaycastAll(_origin, ( distance ).normalized, distance.magnitude);
+        
+        if(hits.Length > 0 &&
+             hits.Any(p => p.collider.transform.name == "ENV") ) {
             var values = hits.Select(p => p.collider.gameObject.name);
             Debug.Log("Object hit " + hits.Length + string.Join(";", values));
             return true;
