@@ -13,11 +13,11 @@ public class AIEnemiesController : MonoBehaviour{
     }
 
     public void SoldiersToPatroll() {
-        Debug.Log("AIEnemiesController SoldiersToPatroll");
+        //Debug.Log("AIEnemiesController SoldiersToPatroll");
         int changedSoilders = 0;
         var soldiers =  GetListOfSoilders();
         if(soldiers != null && soldiers.Length > 0) {
-            ////Debug.Log("SoldiersToPatroll "+ soldiers.Length);
+            //Debug.Log("SoldiersToPatroll "+ soldiers.Length);
             foreach(var soldier in soldiers) {
                 var _soldierMachineState = soldier.GetComponent<SoldierMachineState>();
                 if(_soldierMachineState && !_soldierMachineState.ValidateState(SoldierStates.patrol)) {
@@ -26,7 +26,7 @@ public class AIEnemiesController : MonoBehaviour{
                 }
             }
         }
-        ////Debug.Log("SoldiersToPatrollEnd " + changedSoilders);
+        //Debug.Log("SoldiersToPatrollEnd " + changedSoilders);
     }
 
     public void PlayerIsSpotted(GameObject gameObject) {
@@ -41,12 +41,12 @@ public class AIEnemiesController : MonoBehaviour{
                 }
             }
         }
-        ////Debug.Log("PlayerIsSpottedEnd " + changedSoilders);
+        //Debug.Log("PlayerIsSpottedEnd " + changedSoilders);
     }
 
     private GameObject[] GetListOfSoilders() {
         var soldiers = GameObject.FindGameObjectsWithTag("Soldier");
-        ////Debug.Log("GetListOfSoilders " + soldiers!= null +" "+soldiers?.Length);
+        //Debug.Log("GetListOfSoilders " + soldiers!= null +" "+soldiers?.Length);
         return soldiers;
     }
 }

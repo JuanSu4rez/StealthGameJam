@@ -21,6 +21,8 @@ public class GameController : MonoBehaviour
     void Start() {
         PlayerConstants.IsAlive = true;
         Player = GameObject.FindGameObjectWithTag("Player");
+        if(Player == null)
+            throw new Exception("Player can not be null.");
         var objAiEnemiesController =  GameObject.Find("AIEnemiesController");
         _aiEnemiesController = objAiEnemiesController.GetComponent<AIEnemiesController>();
         if(Instance == null) {
@@ -65,7 +67,7 @@ public class GameController : MonoBehaviour
        // this.enabled = false;
     }
     void LoadScene() {
-        ////Debug.Log("LoadScene call");
+        //Debug.Log("LoadScene call");
         SceneManager.LoadScene(Scenes.SampleScene.ToString());
     }
 

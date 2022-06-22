@@ -25,14 +25,14 @@ public class ColliderController : MonoBehaviour
     }
     //Upon collision with another GameObject, this GameObject will reverse direction
     private void OnTriggerEnter(Collider other) {
-        ////Debug.Log("OnTriggerEnter colliderController");
+        //Debug.Log("OnTriggerEnter colliderController");
         HandleTrigger(other);
     }
 
 
 
     void OnTriggerStay(Collider other) {
-        ////Debug.Log("OnTriggerEnter colliderController");
+        //Debug.Log("OnTriggerEnter colliderController");
         HandleTrigger(other);
     }
 
@@ -40,7 +40,7 @@ public class ColliderController : MonoBehaviour
 
     public bool IsOnVisionRange(GameObject gameObject) {
         if(visionCollider.ClosestPointOnBounds(gameObject.transform.position) == gameObject.transform.position) {
-            ////Debug.Log(other.name + " IS ON vision range");
+            //Debug.Log(other.name + " IS ON vision range");
             return true;
         }
         return false;
@@ -51,7 +51,7 @@ public class ColliderController : MonoBehaviour
         if(other.name == "Cyborg") {
             var playerController = other.GetComponent<IPlayerController>();
             if(visionCollider != null) {
-                ////Debug.Log("Is Vision Collider " + ( other.bounds == visionCollider.bounds ));
+                //Debug.Log("Is Vision Collider " + ( other.bounds == visionCollider.bounds ));
                 onvisionCollider = IsOnVisionRange(other.transform.gameObject);
 
             }
@@ -61,7 +61,7 @@ public class ColliderController : MonoBehaviour
             else {
 
                 var playerIsRunning = playerController.PlayerState == PlayerStates.running;
-                ////Debug.Log("OnTriggerEnter " + playerIsRunning+" "+ playerController.PlayerState);
+                //Debug.Log("OnTriggerEnter " + playerIsRunning+" "+ playerController.PlayerState);
                 if(playerIsRunning) {
                     hearingController.HandleHearing(other);
                 }

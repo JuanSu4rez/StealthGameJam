@@ -12,7 +12,7 @@ public class TestRayCast : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         capsuleColliders = this.GetComponents<CapsuleCollider>();
-        ////Debug.Log(System.Convert.ToString(( (int)LayerMask ), 2));
+        //Debug.Log(System.Convert.ToString(( (int)LayerMask ), 2));
     }
 
     // Update is called once per frame
@@ -23,7 +23,7 @@ public class TestRayCast : MonoBehaviour
 
 
 
-            ////Debug.Log("Hit wall! " + CollideWithWall(gameObject));
+            //Debug.Log("Hit wall! " + CollideWithWall(gameObject));
         }
     }
 
@@ -39,7 +39,7 @@ public class TestRayCast : MonoBehaviour
         RaycastHit[] hits = Physics.RaycastAll(origin, ( distance ).normalized, distance.magnitude, LayerMask);
         if(hits.Length > 0) {
             var values = hits.Select(p => p.collider.gameObject.name);
-            ////Debug.Log("Object hit " + hits.Length + string.Join(";", values));
+            //Debug.Log("Object hit " + hits.Length + string.Join(";", values));
             return true;
         }
         return false;

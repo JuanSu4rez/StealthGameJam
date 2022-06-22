@@ -3,17 +3,20 @@ using System.Collections;
 
 public class HealthBehaviour : MonoBehaviour, IDamageable{
     [SerializeField]
-    private float MaxHealth =100;
+    private float maxHealth =100;
+    public float MaxHealth { get => maxHealth;  }
     [SerializeField]
-    private float Health;
-    public bool IsAlive { get => Health >= 0; }
+    private float health;
+    public float Health { get => health; }
+    public bool IsAlive { get => health >= 0; }
+    public float Percentage { get => health / maxHealth; }
     // Use this for initialization
     void Start() {
         this.enabled = false;
-        Health = MaxHealth;
+        health = MaxHealth;
     }
 
     public void ApplyDamage(float damage) {
-        Health -= damage;
+        health -= damage;
     }
 }

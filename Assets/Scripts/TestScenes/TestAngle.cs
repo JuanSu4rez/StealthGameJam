@@ -20,7 +20,7 @@ public class TestAngle : MonoBehaviour
         var direction =  A.transform.position - this.transform.position;
         Debug.DrawLine(this.transform.position, direction, Color.cyan);
         var angle = Vector3.SignedAngle(objforward, direction, Vector3.up);
-        ////Debug.Log("Angle "+ angle);
-        ////Debug.Log("Angle +360 " + (360 + angle));
+        //Debug.Log("Angle "+ angle);
+        //Debug.Log("Angle +360 " + (360 + angle));
     }
 }

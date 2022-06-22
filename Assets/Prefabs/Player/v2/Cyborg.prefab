@@ -2817,6 +2817,7 @@ GameObject:
   - component: {fileID: 8981751741808378694}
   - component: {fileID: 82481116026031337}
   - component: {fileID: 1513604967488977701}
+  - component: {fileID: 806786455901105207}
   m_Layer: 0
   m_Name: Cyborg
   m_TagString: Player
@@ -2899,7 +2900,7 @@ Animator:
   m_GameObject: {fileID: 8098877644591389691}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 20ae68f045c31f047ad82be91b5c049b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9299eb3dc8eed158e97542e476a22f6a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2939,8 +2940,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca3b3ace3205ee44d9c8a206f83576d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 100
-  Health: 0
+  maxHealth: 100
+  health: 0
 --- !u!82 &1513604967488977701
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3037,6 +3038,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &806786455901105207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8098877644591389691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89d0f2bb514666743b1432dfb041061a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8363593817356339371
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
     void Start() {
         _soldierMachineState = this.GetComponent<SoldierMachineState>();
         var aux = this.GetComponents<Collider>().Select(p => p.GetType().FullName);
-        ////Debug.Log(string.Join(";", aux.ToArray()));
+        //Debug.Log(string.Join(";", aux.ToArray()));
         _capsuleCollider = this.GetComponent<CapsuleCollider>();
 
     }
@@ -23,7 +23,7 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
         if(_soldierMachineState.ValidateState(SoldierStates.attacking)) {
 
             if(_soldierMachineState.AttackingState.AttackState == AttackingStatesValues.attacking && PlayerIsBehingOfAWall() ) {
-                ////Debug.Log("PlayerIsBehingOfAWall true");
+                //Debug.Log("PlayerIsBehingOfAWall true");
                 _soldierMachineState.SetState(_soldierMachineState.PatrolState);
             }
         }
