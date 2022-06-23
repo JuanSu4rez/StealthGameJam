@@ -42,6 +42,7 @@ public class LocoMotionState : MonoBehaviour
     public void SetDestiny(Vector3 vector, float speed = 1.2f) {
         stuckCounter = 0;
         _positionToGo = vector;
+        this.transform.LookAt(new Vector3(_positionToGo.x, 0, _positionToGo.z));
         _goNavMeshAgent.enabled = true;
         _goNavMeshAgent.speed = speed;
         _goNavMeshAgent.SetDestination(vector);

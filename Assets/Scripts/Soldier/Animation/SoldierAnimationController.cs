@@ -23,6 +23,8 @@ public class SoldierAnimationController : MonoBehaviour
 
         if(soldierState == SoldierStates.patrol)
             _animator.SetInteger("patrolState", (int)_soldierMachineState.PatrolState.PatrolStateValue);
+        if(soldierState == SoldierStates.attacking)
+            _animator.SetInteger("attackState", (int)_soldierMachineState.AttackingState.AttackState);
     }
 
 
