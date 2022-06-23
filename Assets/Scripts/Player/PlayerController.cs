@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour, IPlayerController{
         _playerState = PlayerStates.idle;
 
         /// shift button validation
-        _isOnCrouchPosition = Input.GetKey(KeyCode.LeftShift);
+        _isOnCrouchPosition = Input.GetKey(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.LeftShift) ;
         //if(_isOnCrouchPosition && Input.GetKeyUp(KeyCode.LeftShift)) {
           //  _isOnCrouchPosition = false;
         //}
@@ -70,8 +70,8 @@ public class PlayerController : MonoBehaviour, IPlayerController{
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
             var movement = ( transform.forward * verticalInput ) +
                            ( transform.right * -horizontalInput );
-            if(verticalInput != 0 && horizontalInput != 0)
-                Debug.Log(movement + " " + movement.normalized);
+            //if(verticalInput != 0 && horizontalInput != 0)
+             //   //Debug.Log(movement + " " + movement.normalized);
             transform.Translate(movement.normalized * Time.deltaTime * speed);
         }
         ///
@@ -113,6 +113,7 @@ public class PlayerController : MonoBehaviour, IPlayerController{
             animator.SetTrigger("hasDead");
         }
         animator.SetBool("isCrouching", _isOnCrouchPosition);
+        Debug.Log("playerState" + _playerState+" "+_playerStateBefore +" isCrouching " + _isOnCrouchPosition+" ");
         _playerStateBefore = _playerState;
     }
 

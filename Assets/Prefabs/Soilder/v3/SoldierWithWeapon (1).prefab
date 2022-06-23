@@ -2372,7 +2372,7 @@ Animator:
   m_GameObject: {fileID: 6724604967396802736}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6bf30ff148c761e4392c4a5dd7d6a6c2, type: 2}
+  m_Controller: {fileID: 9100000, guid: c280c7b9b9216174eae132e0fcd9a313, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2454,6 +2454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a5f42ba7043b448b0402ac98d76f9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MinmunDistance: 5
   weapon: {fileID: 2547519571149692347}
 --- !u!114 &5878307225970064888
 MonoBehaviour:
@@ -2530,7 +2531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13bbe4e3a8688f8038017c3c485e7a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  marks: {fileID: 0}
+  MarksPrefab: {fileID: 0}
 --- !u!114 &5878307225970064885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2543,6 +2544,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c45e760d1260532b3a6ea4c5fa23c225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  machineGun: {fileID: 0}
+  walking: {fileID: 0}
+  surprise: {fileID: 0}
 --- !u!1 &6748606716689811904
 GameObject:
   m_ObjectHideFlags: 0

@@ -42,7 +42,6 @@ public class AttackingState : MonoBehaviour, ISoldierState
     public void StartAttack() {
         if(AttackState == AttackingStatesValues.chasing) { 
             AttackState = AttackingStatesValues.attacking;
-
         }
         weaponBehaviour = weapon?.GetComponent<IWeaponBehaviour>();
         if(weaponBehaviour != null) {
@@ -52,7 +51,8 @@ public class AttackingState : MonoBehaviour, ISoldierState
 
     public void OnDisable() {
         //this can be called from any of the StateMachineBehaviour 
-        weaponBehaviour?.Disable();
+        if(weaponBehaviour != null)
+        weaponBehaviour.Disable();
     }
 
     public Vector3 DistanceWithThePlayer(){

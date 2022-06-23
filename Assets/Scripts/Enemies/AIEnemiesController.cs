@@ -20,7 +20,7 @@ public class AIEnemiesController : MonoBehaviour{
             //Debug.Log("SoldiersToPatroll "+ soldiers.Length);
             foreach(var soldier in soldiers) {
                 var _soldierMachineState = soldier.GetComponent<SoldierMachineState>();
-                if(_soldierMachineState && !_soldierMachineState.ValidateState(SoldierStates.patrol)) {
+                if(_soldierMachineState && _soldierMachineState.ValidateState(SoldierStates.attacking) && _soldierMachineState.AttackingState.AttackState == AttackingStatesValues.chasing) {
                     _soldierMachineState.SetState(_soldierMachineState.PatrolState);
                     changedSoilders++;
                 }

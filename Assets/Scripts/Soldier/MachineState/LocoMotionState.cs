@@ -10,6 +10,7 @@ public class LocoMotionState : MonoBehaviour
     private float distanceOfTolerance = 0.2f;
     private int stuckCounter = 0;
     private Vector3 lastPosition = Vector3.zero ;
+    public bool HasReachThePoint = false;
     public bool IsMoving { get {
             return _goNavMeshAgent && _goNavMeshAgent.enabled;
         } }
@@ -40,6 +41,7 @@ public class LocoMotionState : MonoBehaviour
         lastPosition = transform.position;
     }
     public void SetDestiny(Vector3 vector, float speed = 1.2f) {
+        HasReachThePoint = false;
         stuckCounter = 0;
         _positionToGo = vector;
         this.transform.LookAt(new Vector3(_positionToGo.x, 0, _positionToGo.z));
@@ -50,6 +52,7 @@ public class LocoMotionState : MonoBehaviour
     }
 
     public void Stop() {
+        HasReachThePoint = true;
         if(_goNavMeshAgent.enabled) {
             _goNavMeshAgent.ResetPath();
             _goNavMeshAgent.enabled = false;

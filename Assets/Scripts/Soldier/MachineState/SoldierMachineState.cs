@@ -24,12 +24,7 @@ public class SoldierMachineState : MonoBehaviour, ISoldierState,IDisabler
     }
     // Update is called once per frame
     void Update() {
-        if(_soldierState() == SoldierStates.patrol) {
-            if(LocomotionState.enabled && PatrolState.PatrolStateValue == PatrolStates.inspecting) {
-                Debug.Log("!ERROR!!!!! Enabled but inspecting");
-                PatrolState.PatrolStateValue = PatrolStates.locomotion;
-            }
-        }
+        
     }
     public SoldierStates _soldierState() {
         return ( currentState as ISoldierState ).SoldierState;
@@ -37,9 +32,9 @@ public class SoldierMachineState : MonoBehaviour, ISoldierState,IDisabler
 
     public void SetState<T>(T newState) where T : MonoBehaviour, ISoldierState {
         if(newState == currentState) {
-            Debug.Log("!ERROR!!!!! NEW STATE CAN NOT BE SAME AS THE CURRENT STATE ");
-            Debug.Log(newState.GetType().FullName);
-            Debug.Log("!ERROR!!!!! ");
+            //Debug.Log("!ERROR!!!!! NEW STATE CAN NOT BE SAME AS THE CURRENT STATE ");
+            //Debug.Log(newState.GetType().FullName);
+            //Debug.Log("!ERROR!!!!! ");
         }
 
         if(newState !=  LocomotionState && LocomotionState) {

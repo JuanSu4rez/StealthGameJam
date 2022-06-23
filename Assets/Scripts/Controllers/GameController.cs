@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour
     private GameObject Player;    
     public bool playerIsSeen;
     public float lasTimePlayerWasSeen;
-
+    public float lasTimePlayerWasOutOfTheLight;
     public AIEnemiesController _aiEnemiesController = null;
     public AIEnemiesController AIEnemiesController {
         get => _aiEnemiesController;

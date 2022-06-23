@@ -54,6 +54,7 @@ public class AlarmController : MonoBehaviour
             if( Time.realtimeSinceStartup - gameControllerScript.lasTimePlayerWasSeen > alertStateDuration){
                 gameControllerScript.playerIsSeen = false;
                 turnOffAlarm();
+                gameControllerScript.AIEnemiesController.SoldiersToPatroll();
             }           
         }       
     }

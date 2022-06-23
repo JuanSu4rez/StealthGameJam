@@ -239,6 +239,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8981751741808378692, guid: f97756dcfdc65e543b466dfc4ea8af8b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f97756dcfdc65e543b466dfc4ea8af8b, type: 3}
 --- !u!1 &45009486 stripped
@@ -1395,7 +1399,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 3.3453608, y: 1}
+    m_SensorSize: {x: 2.174089, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1720,7 +1724,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6724604967396802736, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
@@ -1883,6 +1887,7 @@ MonoBehaviour:
   gameOver: 0
   playerIsSeen: 0
   lasTimePlayerWasSeen: 0
+  lasTimePlayerWasOutOfTheLight: 0
   _aiEnemiesController: {fileID: 0}
 --- !u!4 &954994300
 Transform:
@@ -3944,7 +3949,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6724604967396802736, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
@@ -4253,7 +4258,7 @@ MonoBehaviour:
   alarmLight: {fileID: 705507993}
   finalIntensity: 1
   alarmSound: {fileID: 8300000, guid: 71f7577d10b27bcfd92e7a7ce6ef6fd8, type: 3}
-  alertStateDuration: 3
+  alertStateDuration: 10
 --- !u!82 &1507993241
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4582,7 +4587,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6724604967396802736, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
