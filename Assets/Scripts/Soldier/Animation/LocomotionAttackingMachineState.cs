@@ -38,7 +38,7 @@ public class LocomotionAttackingMachineState : StateMachineBehaviour
         }
         else if(HasStumbleWithThePlayer(ref _soldierMachineState)) {
 
-            //Debug.Log("HasStumbleWithThePlayer ");
+            ////Debug.Log("HasStumbleWithThePlayer ");
             StopChasing(animator, ref _soldierMachineState);
         }
 

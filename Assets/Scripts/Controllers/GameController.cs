@@ -67,7 +67,7 @@ public class GameController : MonoBehaviour
        // this.enabled = false;
     }
     void LoadScene() {
-        //Debug.Log("LoadScene call");
+        ////Debug.Log("LoadScene call");
         SceneManager.LoadScene(Scenes.SampleScene.ToString());
     }
 

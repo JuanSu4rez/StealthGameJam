@@ -23,7 +23,7 @@ public class AutomaticGunBehaviour : MonoBehaviour, IWeaponBehaviour
             yield return new WaitForSeconds(Frecuency);
             _target.ApplyDamage(Damage);
         }
-        Debug.Log("End DamageRutine");
+        //Debug.Log("End DamageRutine");
     }
 
     public void SetTarget(GameObject gameObject) {

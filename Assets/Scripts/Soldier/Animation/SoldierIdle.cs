@@ -5,7 +5,7 @@ public class SoldierIdle : StateMachineBehaviour
 {
     private float initialTime = 0;
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-        //Debug.Log("Duration "+stateInfo.length);
+        ////Debug.Log("Duration "+stateInfo.length);
         initialTime = stateInfo.length;
     }
 

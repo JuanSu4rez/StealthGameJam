@@ -32,9 +32,9 @@ public class SoldierMachineState : MonoBehaviour, ISoldierState,IDisabler
 
     public void SetState<T>(T newState) where T : MonoBehaviour, ISoldierState {
         if(newState == currentState) {
-            //Debug.Log("!ERROR!!!!! NEW STATE CAN NOT BE SAME AS THE CURRENT STATE ");
-            //Debug.Log(newState.GetType().FullName);
-            //Debug.Log("!ERROR!!!!! ");
+            ////Debug.Log("!ERROR!!!!! NEW STATE CAN NOT BE SAME AS THE CURRENT STATE ");
+            ////Debug.Log(newState.GetType().FullName);
+            ////Debug.Log("!ERROR!!!!! ");
         }
 
         if(newState !=  LocomotionState && LocomotionState) {

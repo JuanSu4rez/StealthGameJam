@@ -61,7 +61,7 @@ public class AttackingState : MonoBehaviour, ISoldierState
     }
 
     public  bool ValidateDistance(Vector3 distance) {
-        //Debug.Log("ValidateDistance "+ distance.magnitude);
+        ////Debug.Log("ValidateDistance "+ distance.magnitude);
         return distance.magnitude <= (MinmunDistance)  ;
     }
 
