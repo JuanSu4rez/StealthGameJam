@@ -8,6 +8,7 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
     private CapsuleCollider _capsuleCollider;
     public bool IamAttacking = false;
     public float stamina = 1;
+    public float staminaReduction = 0.3f;
     // Use this for initialization
     void Start() {
         _soldierMachineState = this.GetComponent<SoldierMachineState>();
@@ -28,7 +29,7 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
 
 
             if(_soldierMachineState.LocomotionState.HasReachThePoint) {
-                this.stamina -= 0.3f;
+                this.stamina -= staminaReduction;
                 if(stamina > 0.5) {
                     GoToAttack(_soldierMachineState.AttackingState.Player, stamina);
                 }
@@ -81,7 +82,10 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
         _soldierMachineState.AttackingState.Player = gameObject;
         _soldierMachineState.AttackingState.PointToGo = null;
         _soldierMachineState.AttackingState.AttackState = AttackingStatesValues.attacking;
-        _soldierMachineState.AttackingState.StartAttack();
+        if(!_soldierMachineState.ValidateState(SoldierStates.attacking)) {
+            //SET NEW STATE
+            _soldierMachineState.AttackingState.StartAttack();
+        }
         _soldierMachineState.SetState(_soldierMachineState.AttackingState);
     }
 

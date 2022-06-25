@@ -21,9 +21,9 @@ public class SoundsController : MonoBehaviour
     void Update()
     {
         //TODO -- walking state ....
-       if(!_soldierMachineState.IsWalking()) {
+       /*if(!_soldierMachineState.IsWalking()) {
             StopWalkingSound();
-        }        
+        }    */    
     }
 
     public void PlayWalkingSound() {

@@ -8,6 +8,7 @@ public class MarksController : MonoBehaviour
     public GameObject MarksPrefab;
     private GameObject marks;
     private SoldierMachineState _soldierMachineState;
+    public bool IsSearching = false;
     void Start() {
         if(MarksPrefab)
             marks = Instantiate(MarksPrefab, MarksPrefab.transform.position, MarksPrefab.transform.rotation);
@@ -22,7 +23,7 @@ public class MarksController : MonoBehaviour
         if(_soldierMachineState.ValidateState(SoldierStates.attacking)) {
             Attacking();
         }
-        else if(_soldierMachineState.ValidateState(SoldierStates.searching)) {
+        else if(IsSearching || _soldierMachineState.ValidateState(SoldierStates.searching)) {
             Searching();
         }
     }
