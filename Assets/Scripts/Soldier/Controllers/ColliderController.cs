@@ -39,8 +39,7 @@ public class ColliderController : MonoBehaviour
     void OnTriggerExit(Collider other) {
         ////Debug.Log("OnTriggerEnter colliderController");
         Debug.DrawLine(other.transform.position, other.transform.position + Vector3.up * 5, Color.white);
-        if(watchingController.IamAttacking 
-           ) {
+        if(watchingController.IamAttacking ) {
             watchingController.HandleOnvisionExit(other);
         }
     }

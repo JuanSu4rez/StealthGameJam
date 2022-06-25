@@ -132,7 +132,7 @@ public class PlayerController : MonoBehaviour, IPlayerController{
         var gopos = reference.transform.position;
         gopos= new Vector3( gopos.x, 1.5f, gopos.z);
         var distance = reference.transform.position - origin.transform.position;
-        Debug.DrawLine(_origin, gopos, Color.green);
+        Debug.DrawLine(_origin, gopos, Color.green, 1.5f);
         RaycastHit[] hits = Physics.RaycastAll(_origin, ( distance ).normalized, distance.magnitude);
         
         if(hits.Length > 0 &&

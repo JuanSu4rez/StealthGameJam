@@ -18,10 +18,10 @@ public class AttackingState : MonoBehaviour, ISoldierState
         set;
     }
 
-
     void Start() {
         this.GetComponent<IWeaponBehaviour>();
     }
+
     void Update() {
         if(PointToGo.HasValue)
             Debug.DrawLine(PointToGo.Value, PointToGo.Value + ( Vector3.up * 5 ), Color.red);

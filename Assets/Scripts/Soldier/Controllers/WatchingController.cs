@@ -9,6 +9,10 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
     public bool IamAttacking = false;
     public float stamina = 1;
     public float staminaReduction = 0.3f;
+    public GameObject Player {
+        get;
+        set;
+    }
     // Use this for initialization
     void Start() {
         _soldierMachineState = this.GetComponent<SoldierMachineState>();
@@ -34,6 +38,7 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
                 }
                 else {
                     this.stamina = 1;
+                    Player = null;
                     _soldierMachineState.SetState(_soldierMachineState.PatrolState);
                 }
             }
@@ -51,6 +56,7 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
         if(!_soldierMachineState.PlayerIsAlive) {
             return;
         }
+        Player = collider.gameObject;
         if(
             _soldierMachineState.ValidateState(SoldierStates.attacking) &&
             _soldierMachineState.AttackingState.AttackState == AttackingStatesValues.attacking
@@ -58,20 +64,24 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
             return;
         }
 
-        if(PlayerIsBehindOfAWall()) {
+
+        var isBehindOfaWall = PlayerIsBehindOfAWall();
+        if(isBehindOfaWall) {
             if(IamAttacking) {
                 GoToAttack(_soldierMachineState.AttackingState.Player, stamina);
             }
             return;
         }
-
-        StartAttack(collider.transform.gameObject);
+        else { 
+            StartAttack(collider.transform.gameObject);
+        }
     }
 
 
 
     public bool PlayerIsBehindOfAWall() {
-        var controller = _soldierMachineState.AttackingState?.Player?.GetComponent<PlayerController>();
+        
+        var controller = Player.GetComponent<PlayerController>();
         var result = false;
         if(controller != null) {
             result = controller.CollideWithObstacle(this.gameObject);
