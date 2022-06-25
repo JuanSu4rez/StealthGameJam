@@ -3,7 +3,7 @@ using System.Collections;
 
 public class AutomaticGunBehaviour : MonoBehaviour, IWeaponBehaviour
 {
-    public float Damage = 0.5f;
+    public float Damage = 3f;
     public float Frecuency = 0.3f;
     public IDamageable _target;
     private GameObject targetgo = null;

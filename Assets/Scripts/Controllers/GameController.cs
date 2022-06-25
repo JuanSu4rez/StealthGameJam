@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    private AudioSource audioSource;
+    private AudioSource audioSourceAlarm;
+    private AudioSource audioSourceMainTheme;
     public AudioClip escapeSong;
+    public AudioClip mainTheme;
     public static GameController Instance = null;
     public bool gameOver = false;
     private GameObject Player;    
@@ -31,7 +33,14 @@ public class GameController : MonoBehaviour
         else{
             Destroy(this);
         }
-        audioSource = GetComponent<AudioSource>();
+        audioSourceAlarm = gameObject.AddComponent<AudioSource>();        
+        audioSourceAlarm.clip = escapeSong;
+        audioSourceMainTheme = gameObject.AddComponent<AudioSource>();
+        audioSourceMainTheme.clip = mainTheme;
+        audioSourceMainTheme.loop = true;
+        audioSourceMainTheme.volume = 0.3f;
+        audioSourceAlarm.volume = 0.9f;
+        PlayMainSong();
     }
 
     internal void DeadNotification(GameObject gameObject) {
@@ -56,9 +65,10 @@ public class GameController : MonoBehaviour
     void Update() {
         if(gameOver) {
             Disable();
-        
+            StopMainSong();
+            StopEscapeSong();
         }
-        if(playerIsSeen){
+        if(playerIsSeen){            
             PlayEscapeSong();
         } else {
             StopEscapeSong();}
@@ -72,17 +82,22 @@ public class GameController : MonoBehaviour
     }
 
     public void PlayEscapeSong(){
-        audioSource.clip = escapeSong;
-        if(!audioSource.isPlaying){
-            audioSource.Play();
+        if(!audioSourceAlarm.isPlaying){
+            audioSourceAlarm.Play();
         }
     }
 
-    public void StopEscapeSong(){
-        audioSource.clip = escapeSong;
-        audioSource.Stop();
+    public void StopEscapeSong(){        
+        audioSourceAlarm.Stop();
     }
 
-   
+    public void PlayMainSong(){        
+        if(!audioSourceMainTheme.isPlaying){
+            audioSourceMainTheme.Play();
+        }
+    }
 
+    public void StopMainSong(){        
+        audioSourceMainTheme.Stop();        
+    }
 }
