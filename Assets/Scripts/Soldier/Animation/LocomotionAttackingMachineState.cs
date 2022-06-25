@@ -34,7 +34,7 @@ public class LocomotionAttackingMachineState : StateMachineBehaviour
             return;
         }
 
-
+        /*
         if(IsReadyToAttack(ref _soldierMachineState)) {
             StopChasing(animator, ref _soldierMachineState);
         }
@@ -42,7 +42,7 @@ public class LocomotionAttackingMachineState : StateMachineBehaviour
 
             ////Debug.Log("HasStumbleWithThePlayer ");
             StopChasing(animator, ref _soldierMachineState);
-        }  /**/
+        } */ /**/
 
     }
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {

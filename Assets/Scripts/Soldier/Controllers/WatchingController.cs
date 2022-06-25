@@ -22,15 +22,35 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
         if(_soldierMachineState.ValidateState(SoldierStates.attacking)) {
 
             if(_soldierMachineState.AttackingState.AttackState == AttackingStatesValues.attacking) {
-                if(PlayerIsBehindOfAWall() ){
+                if(PlayerIsBehindOfAWall()) {
                     _soldierMachineState.SetState(_soldierMachineState.PatrolState);
                 }
-                else{
+                else {
                     var distance = this.gameObject.transform.position - _soldierMachineState.AttackingState.Player.transform.position;
-                    if(distance.magnitude > _soldierMachineState.AttackingState.MinmunDistance ){                        
+                    if(distance.magnitude > _soldierMachineState.AttackingState.MinmunDistance) {
                         GoToAttack(_soldierMachineState.AttackingState.Player);
-                    }
+                    } /**/
                 }
+            }
+            else if(_soldierMachineState.AttackingState.AttackState == AttackingStatesValues.chasing) {
+
+
+                if(!_soldierMachineState.LocomotionState.HasReachThePoint) {
+
+                    var distance = this.gameObject.transform.position - _soldierMachineState.AttackingState.Player.transform.position;
+
+                    var stumbleWithThePlayer = distance.magnitude <= _soldierMachineState.AttackingState.MinmunDistance;
+
+                    if(stumbleWithThePlayer) {
+                        StartAttack();
+                    }
+
+                }
+                else {
+                    //searching
+                    _soldierMachineState.SetState(_soldierMachineState.PatrolState);
+                }
+               
             }
         }
 
@@ -53,20 +73,10 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
 
         var distance = this.gameObject.transform.position - collider.transform.position;
         _soldierMachineState.AttackingState.Player = collider.transform.gameObject;
-        /*
-        if(distance.magnitude > _soldierMachineState.AttackingState.MinmunDistance) {
-            var normalizedDistance = distance.normalized;
-            var pointtogo = collider.transform.position + ( normalizedDistance * _soldierMachineState.AttackingState.MinmunDistance );
-            _soldierMachineState.AttackingState.PointToGo = pointtogo;
-            _soldierMachineState.AttackingState.AttackState = AttackingStatesValues.chasing;
-            _soldierMachineState.SetState(_soldierMachineState.AttackingState);
-        }*/
-        //else {
-            _soldierMachineState.AttackingState.PointToGo = null;
-            _soldierMachineState.AttackingState.AttackState = AttackingStatesValues.attacking;
-            _soldierMachineState.SetState(_soldierMachineState.AttackingState);
-        //}
+        StartAttack();
     }
+
+
 
     public bool PlayerIsBehindOfAWall() {
         var controller = _soldierMachineState.AttackingState?.Player?.GetComponent<PlayerController>();
@@ -78,14 +88,18 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
         }
     }
 
+    public void StartAttack() {
+        _soldierMachineState.AttackingState.PointToGo = null;
+        _soldierMachineState.AttackingState.AttackState = AttackingStatesValues.attacking;
+        _soldierMachineState.AttackingState.StartAttack();
+        _soldierMachineState.SetState(_soldierMachineState.AttackingState);
+    }
+
     public void GoToAttack(GameObject gameObject) {
         if(!_soldierMachineState.PlayerIsAlive) {
             return;
         }
 
-        if(_soldierMachineState.ValidateState(SoldierStates.attacking)) {
-            return;
-        }
         float chasingVelocity = 4;
         var distance = this.gameObject.transform.position - gameObject.transform.position;
         _soldierMachineState.AttackingState.Player = gameObject.transform.gameObject;

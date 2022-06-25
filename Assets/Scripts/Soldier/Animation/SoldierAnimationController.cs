@@ -21,10 +21,10 @@ public class SoldierAnimationController : MonoBehaviour
             _animator.SetInteger("state", (int)soldierState);
         lastState = soldierState;
 
-        if(soldierState == SoldierStates.patrol)
-            _animator.SetInteger("patrolState", (int)_soldierMachineState.PatrolState.PatrolStateValue);
-        if(soldierState == SoldierStates.attacking)
-            _animator.SetInteger("attackState", (int)_soldierMachineState.AttackingState.AttackState);
+
+        _animator.SetInteger("patrolState", (int)_soldierMachineState.PatrolState.PatrolStateValue);
+
+        _animator.SetInteger("attackState", (int)_soldierMachineState.AttackingState.AttackState);
     }
 
 

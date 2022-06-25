@@ -40,9 +40,8 @@ public class AttackingState : MonoBehaviour, ISoldierState
     }
 
     public void StartAttack() {
-        if(AttackState == AttackingStatesValues.chasing) { 
-            AttackState = AttackingStatesValues.attacking;
-        }
+        
+         AttackState = AttackingStatesValues.attacking;
         weaponBehaviour = weapon?.GetComponent<IWeaponBehaviour>();
         if(weaponBehaviour != null) {
             weaponBehaviour?.SetTarget(Player);
