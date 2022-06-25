@@ -7,6 +7,7 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
     public LayerMask WallLayerMask;
     private CapsuleCollider _capsuleCollider;
     public bool IamAttacking = false;
+    public float stamina = 1;
     // Use this for initialization
     void Start() {
         _soldierMachineState = this.GetComponent<SoldierMachineState>();
@@ -20,11 +21,29 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
         if(!_soldierMachineState.PlayerIsAlive) {
             return;
         }
+        if(
+            _soldierMachineState.ValidateState(SoldierStates.attacking) &&
+           _soldierMachineState.AttackingState.AttackState == AttackingStatesValues.chasing
+           ) {
+
+
+            if(_soldierMachineState.LocomotionState.HasReachThePoint) {
+                this.stamina -= 0.3f;
+                if(stamina > 0.5) {
+                    GoToAttack(_soldierMachineState.AttackingState.Player, stamina);
+                }
+                else {
+                    this.stamina = 1;
+                    _soldierMachineState.SetState(_soldierMachineState.PatrolState);
+                }
+            }
+        }
     }
 
     public void HandleOnvisionExit(Collider other) {
         if(IamAttacking) {
-            GoToAttack(_soldierMachineState.AttackingState.Player);
+            stamina = 1;
+            GoToAttack(_soldierMachineState.AttackingState.Player, stamina);
         }
     }
 
@@ -66,12 +85,12 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
         _soldierMachineState.SetState(_soldierMachineState.AttackingState);
     }
 
-    public void GoToAttack(GameObject gameObject) {
+    public void GoToAttack(GameObject gameObject, float stamina = 1) {
         if(!_soldierMachineState.PlayerIsAlive) {
             return;
         }
 
-        float chasingVelocity = 4f;
+        float chasingVelocity = 4f * stamina;
         var distance = this.gameObject.transform.position - gameObject.transform.position;
         _soldierMachineState.AttackingState.Player = gameObject.transform.gameObject;
         var normalizedDistance = distance.normalized;
