@@ -17,14 +17,29 @@ public class SoldierAnimationController : MonoBehaviour
 
 
         var soldierState = _soldierMachineState.SoldierState;
-        if(soldierState != lastState)
-            _animator.SetInteger("state", (int)soldierState);
+        //if(soldierState != lastState)
+       _animator.SetInteger("state", (int)soldierState);
         lastState = soldierState;
 
 
         _animator.SetInteger("patrolState", (int)_soldierMachineState.PatrolState.PatrolStateValue);
 
         _animator.SetInteger("attackState", (int)_soldierMachineState.AttackingState.AttackState);
+
+        //Debug.Log("Soldier state "+(int)soldierState);
+
+        switch(soldierState) {
+            case SoldierStates._none:
+                break;
+            case SoldierStates.attacking:
+                Debug.DrawLine(this.transform.position, this.transform.position + Vector3.up * 5, Color.red);
+                break;
+            case SoldierStates.patrol:
+                Debug.DrawLine(this.transform.position, this.transform.position + Vector3.up * 5, Color.blue);
+                break;
+            case SoldierStates.searching:
+                break;
+        }
     }
 
 

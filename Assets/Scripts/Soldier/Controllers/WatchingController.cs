@@ -6,6 +6,7 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
     private SoldierMachineState _soldierMachineState;
     public LayerMask WallLayerMask;
     private CapsuleCollider _capsuleCollider;
+    public bool IamAttacking = false;
     // Use this for initialization
     void Start() {
         _soldierMachineState = this.GetComponent<SoldierMachineState>();
@@ -19,59 +20,29 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
         if(!_soldierMachineState.PlayerIsAlive) {
             return;
         }
-        if(_soldierMachineState.ValidateState(SoldierStates.attacking)) {
-
-            if(_soldierMachineState.AttackingState.AttackState == AttackingStatesValues.attacking) {
-                if(PlayerIsBehindOfAWall()) {
-                    _soldierMachineState.SetState(_soldierMachineState.PatrolState);
-                }
-                else {
-                    var distance = this.gameObject.transform.position - _soldierMachineState.AttackingState.Player.transform.position;
-                    if(distance.magnitude > _soldierMachineState.AttackingState.MinmunDistance ) {
-                        GoToAttack(_soldierMachineState.AttackingState.Player);
-                    } /**/
-                }
-            }
-            else if(_soldierMachineState.AttackingState.AttackState == AttackingStatesValues.chasing) {
-
-                /*
-                if(!_soldierMachineState.LocomotionState.HasReachThePoint) {
-
-                    var distance = this.gameObject.transform.position - _soldierMachineState.AttackingState.Player.transform.position;
-
-                    var stumbleWithThePlayer = distance.magnitude <= _soldierMachineState.AttackingState.MinmunDistance;
-
-                    if(stumbleWithThePlayer) {
-                        StartAttack();
-                    }
-
-                }
-                else {
-
-                }*/
-                if(_soldierMachineState.LocomotionState.HasReachThePoint) {
-                    Debug.Log("Llegue al punto parido");
-                    //searching
-                    _soldierMachineState.SetState(_soldierMachineState.PatrolState);
-                }
-                
-               
-            }
-        }
-
     }
+
+    public void HandleOnvisionExit(Collider other) {
+        if(IamAttacking) {
+            GoToAttack(_soldierMachineState.AttackingState.Player);
+        }
+    }
+
     public void HandleWatching(Collider collider) {
         if(!_soldierMachineState.PlayerIsAlive) {
             return;
         }
-        if(_soldierMachineState.AttackingState.AttackState == AttackingStatesValues.attacking) {
+        if(
+            _soldierMachineState.ValidateState(SoldierStates.attacking) &&
+            _soldierMachineState.AttackingState.AttackState == AttackingStatesValues.attacking
+            ) {
             return;
         }
         if(PlayerIsBehindOfAWall()) {
             return;
         }
-        _soldierMachineState.AttackingState.Player = collider.transform.gameObject;
-        StartAttack();
+
+        StartAttack(collider.transform.gameObject);
     }
 
 
@@ -86,7 +57,9 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
         return result;
     }
 
-    public void StartAttack() {
+    public void StartAttack(GameObject gameObject) {
+        IamAttacking = true;
+        _soldierMachineState.AttackingState.Player = gameObject;
         _soldierMachineState.AttackingState.PointToGo = null;
         _soldierMachineState.AttackingState.AttackState = AttackingStatesValues.attacking;
         _soldierMachineState.AttackingState.StartAttack();
@@ -98,15 +71,19 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
             return;
         }
 
-        float chasingVelocity = 4;
+        float chasingVelocity = 4f;
         var distance = this.gameObject.transform.position - gameObject.transform.position;
         _soldierMachineState.AttackingState.Player = gameObject.transform.gameObject;
         var normalizedDistance = distance.normalized;
-        var pointToGo = gameObject.transform.position + ( normalizedDistance * 2 );
-        Debug.DrawLine(pointToGo, pointToGo + Vector3.up * 10, Color.red, 20);
+        var pointToGo = gameObject.transform.position;// + ( normalizedDistance * 2 );
+       // Debug.DrawLine(pointToGo, pointToGo + Vector3.up * 10, Color.red, 20);
         _soldierMachineState.AttackingState.PointToGo = pointToGo;
         _soldierMachineState.AttackingState.AttackState = AttackingStatesValues.chasing;
-        _soldierMachineState.SetState(_soldierMachineState.AttackingState);
+        if(!_soldierMachineState.ValidateState(SoldierStates.attacking)) { 
+            //SET NEW STATE
+            _soldierMachineState.SetState(_soldierMachineState.AttackingState);
+        }
         _soldierMachineState.LocomotionState.SetDestiny(pointToGo, chasingVelocity);
+        IamAttacking = false;
     }
 }

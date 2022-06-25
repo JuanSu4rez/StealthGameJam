@@ -99,7 +99,7 @@ public class AlarmController : MonoBehaviour
         }    
     }
      void OnDisable() {
-        StopCoroutine(alarmCoroutine);
+        
     }
 
 

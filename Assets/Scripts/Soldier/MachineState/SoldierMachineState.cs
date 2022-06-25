@@ -35,6 +35,7 @@ public class SoldierMachineState : MonoBehaviour, ISoldierState,IDisabler
             ////Debug.Log("!ERROR!!!!! NEW STATE CAN NOT BE SAME AS THE CURRENT STATE ");
             ////Debug.Log(newState.GetType().FullName);
             ////Debug.Log("!ERROR!!!!! ");
+            
         }
 
         if(newState !=  LocomotionState && LocomotionState) {

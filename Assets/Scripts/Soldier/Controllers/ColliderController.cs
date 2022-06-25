@@ -36,8 +36,16 @@ public class ColliderController : MonoBehaviour
         HandleTrigger(other);
     }
 
+    void OnTriggerExit(Collider other) {
+        ////Debug.Log("OnTriggerEnter colliderController");
+        Debug.DrawLine(other.transform.position, other.transform.position + Vector3.up * 5, Color.white);
+        if(watchingController.IamAttacking 
+           ) {
+            watchingController.HandleOnvisionExit(other);
+        }
+    }
 
-
+   
     public bool IsOnVisionRange(GameObject gameObject) {
         if(visionCollider.ClosestPointOnBounds(gameObject.transform.position) == gameObject.transform.position) {
             Debug.Log(gameObject.name + " IS ON vision range");
@@ -56,11 +64,12 @@ public class ColliderController : MonoBehaviour
 
             }
             if(onvisionCollider) {
+                //watchingController.IamAttacking = true;
                 watchingController.HandleWatching(other);
             }
             else {
-
-                var playerIsRunning = playerController.PlayerState == PlayerStates.running;
+                //watchingController.IamAttacking = false;
+               var playerIsRunning = playerController.PlayerState == PlayerStates.running;
                 ////Debug.Log("OnTriggerEnter " + playerIsRunning+" "+ playerController.PlayerState);
                 if(playerIsRunning) {
                     hearingController.HandleHearing(other);

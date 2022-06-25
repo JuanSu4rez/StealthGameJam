@@ -21,7 +21,7 @@ public class HearingController : MonoBehaviour, IHearingHandler
         if(_soldierMachineState.ValidateState(SoldierStates.searching)) {
             return;
         }
-        var angle = Vector3.SignedAngle(this.transform.forward, collider.transform.position, Vector3.up);
+      //  var angle = Vector3.SignedAngle(this.transform.forward, collider.transform.position, Vector3.up);
         _soldierMachineState.SearchingState.LookAt(collider.transform.position);
         //_soldierMachineState.SetState(_soldierMachineState.SearchingState);
         ////Debug.Log("OnSearchingState ");
