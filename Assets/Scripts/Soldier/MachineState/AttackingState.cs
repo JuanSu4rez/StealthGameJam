@@ -40,28 +40,31 @@ public class AttackingState : MonoBehaviour, ISoldierState
     }
 
     public void StartAttack() {
-        
-       AttackState = AttackingStatesValues.attacking;
-        weaponBehaviour = weapon?.GetComponent<IWeaponBehaviour>();
-        if(weaponBehaviour != null) {
-            weaponBehaviour?.SetTarget(Player);
+        AttackState = AttackingStatesValues.attacking;
+        if(weapon) {
+            weaponBehaviour = weapon.GetComponent<IWeaponBehaviour>();
+            if(weaponBehaviour != null && !weaponBehaviour.IsActive) {
+                weaponBehaviour.SetTarget(Player);
+            }
         }
     }
 
-    public void OnDisable() {
-        //this can be called from any of the StateMachineBehaviour 
-        if(weaponBehaviour != null)
-        weaponBehaviour.Disable();
+    public void StartChasing() {
+        AttackState = AttackingStatesValues.chasing;
+        if(weapon) {
+            weaponBehaviour = weapon.GetComponent<IWeaponBehaviour>();
+            weaponBehaviour.Disable();
+        }
     }
 
-    public Vector3 DistanceWithThePlayer(){
+    public Vector3 DistanceWithThePlayer() {
         var distance = this.gameObject.transform.position - Player.transform.position;
         return distance;
     }
 
-    public  bool ValidateDistance(Vector3 distance) {
+    public bool ValidateDistance(Vector3 distance) {
         ////Debug.Log("ValidateDistance "+ distance.magnitude);
-        return distance.magnitude <= (MinmunDistance)  ;
+        return distance.magnitude <= ( MinmunDistance );
     }
 
     public bool IsOnDistanceToAttack() {
@@ -69,7 +72,7 @@ public class AttackingState : MonoBehaviour, ISoldierState
         var controller = Player?.GetComponent<PlayerController>();
         if(controller != null) {
             return
-              !controller.CollideWithObstacle(this.gameObject) && 
+              !controller.CollideWithObstacle(this.gameObject) &&
               ValidateDistance(
                 DistanceWithThePlayer()
               );

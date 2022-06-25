@@ -22,7 +22,6 @@ public class SearchingState : MonoBehaviour, ISoldierState
     }
 
     internal void LookAt(Vector3 position) {
-        _position = position;
-        enabled = true;
+        this.transform.LookAt(position);
     }
 }

@@ -3,13 +3,13 @@ using System.Collections;
 
 public class AutomaticGunBehaviour : MonoBehaviour, IWeaponBehaviour
 {
-    public float Damage = 3f;
-    public float Frecuency = 0.3f;
+    private float Damage = 5f;
+    private float Frecuency = 0.2f;
     public IDamageable _target;
     private GameObject targetgo = null;
     private bool flag = false;
 
-    public bool IsActive { get; set; }
+    public bool IsActive { get => flag; }
 
     // Use this for initialization
     void Start() {
@@ -19,7 +19,7 @@ public class AutomaticGunBehaviour : MonoBehaviour, IWeaponBehaviour
     IEnumerator DamageRutine() {
         yield return new WaitForSeconds(0.01f);
         while(flag) {
-            Debug.DrawLine(transform.position, targetgo.transform.position, Color.cyan);
+            Debug.DrawLine(transform.position, targetgo.transform.position, Color.cyan,3);
             yield return new WaitForSeconds(Frecuency);
             _target.ApplyDamage(Damage);
         }

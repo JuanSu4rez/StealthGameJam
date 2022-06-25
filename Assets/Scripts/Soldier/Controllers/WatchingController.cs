@@ -27,7 +27,6 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
            _soldierMachineState.AttackingState.AttackState == AttackingStatesValues.chasing
            ) {
 
-
             if(_soldierMachineState.LocomotionState.HasReachThePoint) {
                 this.stamina -= staminaReduction;
                 if(stamina > 0.5) {
@@ -58,7 +57,11 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
             ) {
             return;
         }
+
         if(PlayerIsBehindOfAWall()) {
+            if(IamAttacking) {
+                GoToAttack(_soldierMachineState.AttackingState.Player, stamina);
+            }
             return;
         }
 
@@ -71,22 +74,28 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
         var controller = _soldierMachineState.AttackingState?.Player?.GetComponent<PlayerController>();
         var result = false;
         if(controller != null) {
-            result =  controller.CollideWithObstacle(this.gameObject);
+            result = controller.CollideWithObstacle(this.gameObject);
         }
         Debug.Log("PlayerIsBehindOfAWall " + result);
         return result;
     }
 
     public void StartAttack(GameObject gameObject) {
+        if(IamAttacking)
+            return;
+
         IamAttacking = true;
         _soldierMachineState.AttackingState.Player = gameObject;
         _soldierMachineState.AttackingState.PointToGo = null;
         _soldierMachineState.AttackingState.AttackState = AttackingStatesValues.attacking;
+        _soldierMachineState.AttackingState.StartAttack();
+        if(!_soldierMachineState.LocomotionState.HasReachThePoint) {
+            _soldierMachineState.LocomotionState.Stop();
+        }
         if(!_soldierMachineState.ValidateState(SoldierStates.attacking)) {
             //SET NEW STATE
-            _soldierMachineState.AttackingState.StartAttack();
+            _soldierMachineState.SetState(_soldierMachineState.AttackingState);
         }
-        _soldierMachineState.SetState(_soldierMachineState.AttackingState);
     }
 
     public void GoToAttack(GameObject gameObject, float stamina = 1) {
@@ -98,11 +107,11 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
         var distance = this.gameObject.transform.position - gameObject.transform.position;
         _soldierMachineState.AttackingState.Player = gameObject.transform.gameObject;
         var normalizedDistance = distance.normalized;
-        var pointToGo = gameObject.transform.position;// + ( normalizedDistance * 2 );
-       // Debug.DrawLine(pointToGo, pointToGo + Vector3.up * 10, Color.red, 20);
+        var pointToGo = gameObject.transform.position;
         _soldierMachineState.AttackingState.PointToGo = pointToGo;
-        _soldierMachineState.AttackingState.AttackState = AttackingStatesValues.chasing;
-        if(!_soldierMachineState.ValidateState(SoldierStates.attacking)) { 
+        _soldierMachineState.AttackingState.StartChasing();
+
+        if(!_soldierMachineState.ValidateState(SoldierStates.attacking)) {
             //SET NEW STATE
             _soldierMachineState.SetState(_soldierMachineState.AttackingState);
         }
