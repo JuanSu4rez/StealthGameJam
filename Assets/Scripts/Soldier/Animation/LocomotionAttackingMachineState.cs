@@ -7,6 +7,8 @@ public class LocomotionAttackingMachineState : StateMachineBehaviour
         var _soldierMachineState = animator.transform.GetComponent<SoldierMachineState>();
         var soundsController = animator.transform.GetComponent<SoundsController>();
 
+        soundsController.PlayMachineGunSound();
+        /*
         if(_soldierMachineState.AttackingState.AttackState == AttackingStatesValues.attacking) {
             StopChasing(animator, ref _soldierMachineState);
             soundsController.PlayMachineGunSound();
@@ -20,11 +22,11 @@ public class LocomotionAttackingMachineState : StateMachineBehaviour
             if(soundsController) {
                 soundsController.PlayWalkingSound();
             }
-        }
+        }*/
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-
+      
         var _soldierMachineState = animator.transform.GetComponent<SoldierMachineState>();
         var colliderController = animator.transform.GetComponent<ColliderController>();
 
@@ -40,11 +42,17 @@ public class LocomotionAttackingMachineState : StateMachineBehaviour
 
             ////Debug.Log("HasStumbleWithThePlayer ");
             StopChasing(animator, ref _soldierMachineState);
-        }
+        }  /**/
 
     }
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+        var _soldierMachineState = animator.transform.GetComponent<SoldierMachineState>();
+        var soundsController = animator.transform.GetComponent<SoundsController>();
+        soundsController.StopMachineGunSound();
+    }
 
-    private bool IsReadyToAttack(ref SoldierMachineState _soldierMachineState) {
+
+        private bool IsReadyToAttack(ref SoldierMachineState _soldierMachineState) {
         return !_soldierMachineState.LocomotionState.enabled &&
                _soldierMachineState.LocomotionState.HasReachThePoint &&
                _soldierMachineState.AttackingState.AttackState == AttackingStatesValues.chasing;

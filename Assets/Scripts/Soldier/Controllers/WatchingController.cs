@@ -86,7 +86,7 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
         if(_soldierMachineState.ValidateState(SoldierStates.attacking)) {
             return;
         }
-
+        float chasingVelocity = 4;
         var distance = this.gameObject.transform.position - gameObject.transform.position;
         _soldierMachineState.AttackingState.Player = gameObject.transform.gameObject;
         var normalizedDistance = distance.normalized;
@@ -95,5 +95,6 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
         _soldierMachineState.AttackingState.PointToGo = pointToGo;
         _soldierMachineState.AttackingState.AttackState = AttackingStatesValues.chasing;
         _soldierMachineState.SetState(_soldierMachineState.AttackingState);
+        _soldierMachineState.LocomotionState.SetDestiny(pointToGo, chasingVelocity);
     }
 }

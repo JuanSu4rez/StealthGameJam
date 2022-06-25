@@ -25,18 +25,21 @@ public class LocoMotionState : MonoBehaviour
         float distanceToDestiny = Mathf.Abs(Vector3.Distance(position, _positionToGo));
         if(distanceToDestiny <= distanceOfTolerance) {
             this.transform.position = _positionToGo;
+            HasReachThePoint = true;
             Stop();
         }
         else {
-            float lastPositiondistance = Mathf.Abs(Vector3.Distance(position, lastPosition)) * 1000.0f;
-            if(lastPositiondistance <= 0.5f) {
+            float lastPositionDistance = Mathf.Abs(Vector3.Distance(position, lastPosition)) * 1000.0f;
+            if(lastPositionDistance <= 0.5f) {
                 stuckCounter++;
             }
             else {
                 stuckCounter = 0;
             }
-            if(stuckCounter == 10)
+            if(stuckCounter == 10) {
+                HasReachThePoint = true;
                 Stop();
+            }
         }
         lastPosition = transform.position;
     }
@@ -52,7 +55,6 @@ public class LocoMotionState : MonoBehaviour
     }
 
     public void Stop() {
-        HasReachThePoint = true;
         if(_goNavMeshAgent.enabled) {
             _goNavMeshAgent.ResetPath();
             _goNavMeshAgent.enabled = false;
