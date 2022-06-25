@@ -68,10 +68,11 @@ public class LocomotionAttackingMachineState : StateMachineBehaviour
             _soldierMachineState.LocomotionState.Stop();
         }
 
-        _soldierMachineState.AttackingState.StartAttack();
-        var soundsController = animator.transform.GetComponent<SoundsController>();
-        soundsController.PlayMachineGunSound();
+       // _soldierMachineState.AttackingState.StartAttack();
+       // var soundsController = animator.transform.GetComponent<SoundsController>();
+        //soundsController.PlayMachineGunSound();
     }
+   
 
     private bool IsValidState(ref SoldierMachineState _soldierMachineState) {
         return _soldierMachineState.SoldierState == SoldierStates.attacking;

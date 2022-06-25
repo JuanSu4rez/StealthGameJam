@@ -40,7 +40,7 @@ public class ColliderController : MonoBehaviour
 
     public bool IsOnVisionRange(GameObject gameObject) {
         if(visionCollider.ClosestPointOnBounds(gameObject.transform.position) == gameObject.transform.position) {
-            ////Debug.Log(other.name + " IS ON vision range");
+            Debug.Log(gameObject.name + " IS ON vision range");
             return true;
         }
         return false;

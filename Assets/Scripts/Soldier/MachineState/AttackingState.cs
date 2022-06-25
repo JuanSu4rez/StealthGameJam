@@ -41,7 +41,7 @@ public class AttackingState : MonoBehaviour, ISoldierState
 
     public void StartAttack() {
         
-         AttackState = AttackingStatesValues.attacking;
+       AttackState = AttackingStatesValues.attacking;
         weaponBehaviour = weapon?.GetComponent<IWeaponBehaviour>();
         if(weaponBehaviour != null) {
             weaponBehaviour?.SetTarget(Player);

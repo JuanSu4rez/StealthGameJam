@@ -27,14 +27,14 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
                 }
                 else {
                     var distance = this.gameObject.transform.position - _soldierMachineState.AttackingState.Player.transform.position;
-                    if(distance.magnitude > _soldierMachineState.AttackingState.MinmunDistance) {
+                    if(distance.magnitude > _soldierMachineState.AttackingState.MinmunDistance ) {
                         GoToAttack(_soldierMachineState.AttackingState.Player);
                     } /**/
                 }
             }
             else if(_soldierMachineState.AttackingState.AttackState == AttackingStatesValues.chasing) {
 
-
+                /*
                 if(!_soldierMachineState.LocomotionState.HasReachThePoint) {
 
                     var distance = this.gameObject.transform.position - _soldierMachineState.AttackingState.Player.transform.position;
@@ -47,9 +47,14 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
 
                 }
                 else {
+
+                }*/
+                if(_soldierMachineState.LocomotionState.HasReachThePoint) {
+                    Debug.Log("Llegue al punto parido");
                     //searching
                     _soldierMachineState.SetState(_soldierMachineState.PatrolState);
                 }
+                
                
             }
         }
@@ -59,19 +64,12 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
         if(!_soldierMachineState.PlayerIsAlive) {
             return;
         }
-
-        if(_soldierMachineState.ValidateState(SoldierStates.attacking)) {
+        if(_soldierMachineState.AttackingState.AttackState == AttackingStatesValues.attacking) {
             return;
         }
-        //sent ray to validate if there is a wall
-        Debug.Log("PlayerIsBehingOfAWall " + PlayerIsBehindOfAWall());
         if(PlayerIsBehindOfAWall()) {
             return;
         }
-
-        _soldierMachineState.AttackingState.Player = collider.transform.gameObject;
-
-        var distance = this.gameObject.transform.position - collider.transform.position;
         _soldierMachineState.AttackingState.Player = collider.transform.gameObject;
         StartAttack();
     }
@@ -80,12 +78,12 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
 
     public bool PlayerIsBehindOfAWall() {
         var controller = _soldierMachineState.AttackingState?.Player?.GetComponent<PlayerController>();
+        var result = false;
         if(controller != null) {
-            return controller.CollideWithObstacle(this.gameObject);
+            result =  controller.CollideWithObstacle(this.gameObject);
         }
-        else {
-            return false;
-        }
+        Debug.Log("PlayerIsBehindOfAWall " + result);
+        return result;
     }
 
     public void StartAttack() {
