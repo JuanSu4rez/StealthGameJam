@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour, IPlayerController{
     }
     void MovePlayer() {
         if(_playerState == PlayerStates.dying) {
+            if(audioSource != null)
+                audioSource?.Stop();
             return;
         }
         _playerState = PlayerStates.idle;
@@ -105,6 +107,8 @@ public class PlayerController : MonoBehaviour, IPlayerController{
         }
         else {
             _playerState = PlayerStates.dying;
+            if(audioSource != null)
+                audioSource?.Stop();
         }
 
         animator.SetInteger("playerState", (int)_playerState);

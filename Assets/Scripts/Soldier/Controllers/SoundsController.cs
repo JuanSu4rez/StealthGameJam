@@ -5,7 +5,8 @@ using UnityEngine;
 public class SoundsController : MonoBehaviour
 {
     // Start is called before the first frame update
-    private AudioSource audioSource;
+    private AudioSource audioSourceSteps;
+    private AudioSource audioSourceMachineGun;
     private SoldierMachineState _soldierMachineState;
     public AudioClip machineGun;
     public AudioClip walking;
@@ -13,7 +14,11 @@ public class SoundsController : MonoBehaviour
     public AudioClip surprise;
     void Start()
     {
-        audioSource = this.GetComponent<AudioSource>(); 
+       var audiosources = this.GetComponents<AudioSource>();
+        audioSourceSteps = audiosources[0];
+        audioSourceSteps.Stop();
+        audioSourceMachineGun = audiosources[audiosources.Length-1];
+        audioSourceMachineGun.Stop();
         _soldierMachineState = this.GetComponent<SoldierMachineState>();
     }
 
@@ -27,37 +32,36 @@ public class SoundsController : MonoBehaviour
     }
 
     public void PlayWalkingSound() {
-        if(audioSource != null &&  !audioSource.isPlaying) {
-            audioSource.clip = walking;
-            audioSource.Play();
+        if(audioSourceSteps != null &&  !audioSourceSteps.isPlaying) {
+            audioSourceSteps.clip = walking;
+            audioSourceSteps.Play();
         }
     }
 
     public void StopWalkingSound() {
-        if(audioSource != null &&  audioSource.isPlaying) {
-            audioSource.clip = walking;
-            audioSource.Stop();
+        if(audioSourceSteps != null &&  audioSourceSteps.isPlaying) {
+            audioSourceSteps.clip = walking;
+            audioSourceSteps.Stop();
         }
     }
 
      public void PlayMachineGunSound() {
-        if(audioSource != null &&  !audioSource.isPlaying) {
-            audioSource.clip = machineGun;
-            audioSource.Play();
+        if(audioSourceMachineGun != null &&  !audioSourceMachineGun.isPlaying) {
+            audioSourceMachineGun.Play();
         }
     }
 
     public void StopMachineGunSound() {
-        if(audioSource != null &&  audioSource.isPlaying) {
-            audioSource.clip = machineGun;
-            audioSource.Stop();
+        if(audioSourceMachineGun != null && audioSourceMachineGun.isPlaying) {
+            audioSourceMachineGun.clip = machineGun;
+            audioSourceMachineGun.Stop();
         }
     }
 
     public void PlaySurprisedSound() {
-        if(audioSource != null &&  !audioSource.isPlaying) {
-            audioSource.clip = surprise;
-            audioSource.Play();
+        if(audioSourceSteps != null &&  !audioSourceSteps.isPlaying) {
+            audioSourceSteps.clip = surprise;
+            audioSourceSteps.Play();
         }
     }
 }

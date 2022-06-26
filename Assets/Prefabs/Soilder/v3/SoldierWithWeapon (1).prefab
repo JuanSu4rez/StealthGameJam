@@ -800,8 +800,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1428b75b253f7bb49bd07e40a0423459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 0.5
-  Frecuency: 0.3
 --- !u!1 &2615591185274047784
 GameObject:
   m_ObjectHideFlags: 0
@@ -2156,6 +2154,7 @@ GameObject:
   - component: {fileID: 5878307225970064881}
   - component: {fileID: 5878307225970064882}
   - component: {fileID: 5878307225970064842}
+  - component: {fileID: 5520427322708336144}
   - component: {fileID: 5878307225970064893}
   - component: {fileID: 5878307225970064871}
   - component: {fileID: 5878307225970064868}
@@ -2287,9 +2286,105 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 20
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &5520427322708336144
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6724604967396802736}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: a730346d6e093f433bdcdf518e7aa743, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 20
+  Pan2D: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -2428,7 +2523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8293391a930bff40a27ab372d4f8752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotating: 0
+  SearchingStateValues: 0
 --- !u!114 &5878307225970064890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2468,6 +2563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3389695755ba978478e62fb9616f65a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HasReachThePoint: 0
 --- !u!114 &5878307225970064889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2495,6 +2591,9 @@ MonoBehaviour:
   WallLayerMask:
     serializedVersion: 2
     m_Bits: 0
+  IamAttacking: 0
+  stamina: 1
+  staminaReduction: 0.3
 --- !u!114 &5878307225970064895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2519,6 +2618,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eea06024af850f4b8508c19cca1a493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Time: 2
+  IamSearching: 0
 --- !u!114 &5878307225970064884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2532,6 +2633,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MarksPrefab: {fileID: 0}
+  IsSearching: 0
 --- !u!114 &5878307225970064885
 MonoBehaviour:
   m_ObjectHideFlags: 0

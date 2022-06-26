@@ -206,12 +206,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5878307225970064842, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
       propertyPath: MaxDistance
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5878307225970064842, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: 20b3b84a8ed97dd8ab8b635f68beec01, type: 3}
     - target: {fileID: 5878307225970064842, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
       propertyPath: rolloffMode
       value: 1
@@ -323,7 +323,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8876364939968151873, guid: f97756dcfdc65e543b466dfc4ea8af8b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.68
+      value: -5.21
       objectReference: {fileID: 0}
     - target: {fileID: 8876364939968151873, guid: f97756dcfdc65e543b466dfc4ea8af8b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -331,7 +331,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8876364939968151873, guid: f97756dcfdc65e543b466dfc4ea8af8b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 23.8
+      value: 2.98
       objectReference: {fileID: 0}
     - target: {fileID: 8876364939968151873, guid: f97756dcfdc65e543b466dfc4ea8af8b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -711,12 +711,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5878307225970064842, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
       propertyPath: MaxDistance
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5878307225970064842, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: 20b3b84a8ed97dd8ab8b635f68beec01, type: 3}
     - target: {fileID: 5878307225970064842, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
       propertyPath: rolloffMode
       value: 1
@@ -2033,7 +2033,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 4.2058825, y: 1}
+    m_SensorSize: {x: 3.535294, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2050,7 +2050,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 735180864}
   m_LocalRotation: {x: 0.53729963, y: 0, z: 0, w: 0.8433915}
-  m_LocalPosition: {x: -10.734217, y: 9.514612, z: 19.62682}
+  m_LocalPosition: {x: -5.264216, y: 9.514612, z: -1.1931818}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2074,9 +2074,13 @@ PrefabInstance:
       propertyPath: Frecuency
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5520427322708336144, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: a730346d6e093f433bdcdf518e7aa743, type: 3}
     - target: {fileID: 5878307225970064842, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
       propertyPath: MaxDistance
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5878307225970064842, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
       propertyPath: rolloffMode
@@ -2266,12 +2270,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5878307225970064842, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
       propertyPath: MaxDistance
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5878307225970064842, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: 20b3b84a8ed97dd8ab8b635f68beec01, type: 3}
     - target: {fileID: 5878307225970064842, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
       propertyPath: rolloffMode
       value: 1
@@ -2550,12 +2554,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5878307225970064842, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
       propertyPath: MaxDistance
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5878307225970064842, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: 20b3b84a8ed97dd8ab8b635f68beec01, type: 3}
     - target: {fileID: 5878307225970064842, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
       propertyPath: rolloffMode
       value: 1
@@ -2953,7 +2957,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.53729963, y: 0, z: 0, w: 0.8433915}
-  m_LocalPosition: {x: -10.734217, y: 9.514612, z: 19.62682}
+  m_LocalPosition: {x: -5.264216, y: 9.514612, z: -1.1931818}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5086,14 +5090,18 @@ PrefabInstance:
       propertyPath: Frecuency
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 5520427322708336144, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5878307225970064842, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
       propertyPath: MaxDistance
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5878307225970064842, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: 20b3b84a8ed97dd8ab8b635f68beec01, type: 3}
     - target: {fileID: 5878307225970064842, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
       propertyPath: rolloffMode
       value: 1
@@ -6160,12 +6168,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5878307225970064842, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
       propertyPath: MaxDistance
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5878307225970064842, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: 20b3b84a8ed97dd8ab8b635f68beec01, type: 3}
     - target: {fileID: 5878307225970064842, guid: 8f094e759b6af1f4ab697481c88d835b, type: 3}
       propertyPath: rolloffMode
       value: 1
