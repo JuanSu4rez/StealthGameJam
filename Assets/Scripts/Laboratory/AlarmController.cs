@@ -37,18 +37,14 @@ public class AlarmController : MonoBehaviour
         speed = 1.25f;
         lightGoingUp = true;
         tolerance = 0.3f;
-        alarmCoroutine = AlarmCoroutine();
         gameControllerScript = GameObject.Find("GameController").GetComponent<GameController>();
+        audioSource.Stop();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if(gameControllerScript.playerIsSeen && !coroutineFlag) {
-         //    turnOnAlarm();
-            //StartCoroutine(alarmCoroutine);
-        //}
         if(gameControllerScript.playerIsSeen){            
             turnOnAlarm();
             if( Time.realtimeSinceStartup - gameControllerScript.lasTimePlayerWasSeen > alertStateDuration){
@@ -59,15 +55,7 @@ public class AlarmController : MonoBehaviour
         }       
     }
 
-    IEnumerator AlarmCoroutine() {
-        coroutineFlag = true;
-        turnOnAlarm();
-        yield return new WaitForSeconds(10);
-        gameControllerScript.playerIsSeen = false;
-        turnOffAlarm();        
-        coroutineFlag = false;
-
-    }
+    
 
     void turnOffAlarm(){
         light.color = originalColor;
