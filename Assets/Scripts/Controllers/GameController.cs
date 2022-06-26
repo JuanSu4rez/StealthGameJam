@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour
     public AudioClip mainTheme;
     public static GameController Instance = null;
     public bool gameOver = false;
-    private GameObject Player;    
+    private GameObject Player;
     public bool playerIsSeen;
     public float lasTimePlayerWasSeen;
     public float lasTimePlayerWasOutOfTheLight;
@@ -20,14 +20,18 @@ public class GameController : MonoBehaviour
         get => _aiEnemiesController;
     }
     public int showFirstRunningCourutine = 0;
-    public bool _firstRunCourutineWasRun = false;
-    public static bool staticfirstRunCourutineWasRun = false;
+    public int _firstRunCourutineWasRun = 0;
+    public static bool staticfirstRunCourutineWasRun;
     private GameObject MainCamera;
     private GameObject BrainCamera;
     public GameObject ExitCamera;
     // Use this for initialization
     void Start() {
-        staticfirstRunCourutineWasRun = _firstRunCourutineWasRun;
+
+        if(_firstRunCourutineWasRun == 1) { 
+            staticfirstRunCourutineWasRun = true;
+        }
+
         if(Instance == null) {
             Instance = this;
         }
@@ -52,9 +56,9 @@ public class GameController : MonoBehaviour
         }
         if(Player == null)
             throw new Exception("Player can not be null.");
-        var objAiEnemiesController =  GameObject.Find("AIEnemiesController");
+        var objAiEnemiesController = GameObject.Find("AIEnemiesController");
         _aiEnemiesController = objAiEnemiesController.GetComponent<AIEnemiesController>();
-        audioSourceAlarm = gameObject.AddComponent<AudioSource>();        
+        audioSourceAlarm = gameObject.AddComponent<AudioSource>();
         audioSourceAlarm.clip = escapeSong;
         audioSourceMainTheme = gameObject.AddComponent<AudioSource>();
         audioSourceMainTheme.clip = mainTheme;
@@ -67,7 +71,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update() {
 
-        if(showFirstRunningCourutine == 0 ) {
+        if(showFirstRunningCourutine == 0) {
             StartCoroutine(shoWFristRunningCourutine());
         }
 
@@ -119,14 +123,14 @@ public class GameController : MonoBehaviour
         if(Player == gameObject) {
             PlayerConstants.IsAlive = false;
             //ShowGameOverAndTheProperButtons
-            Invoke("SoldiersToPatrollGameOver", 1.5f);
-            Invoke("GameOver", 2.8f);
+            Invoke("SoldiersToPatrollGameOver", 0.8f);
+            Invoke("GameOver", 2f);
         }
     }
 
     void GameOver() {
         gameOver = true;
-        Invoke("LoadScene", 3);
+        Invoke("LoadScene", 0.2f);
     }
 
     public void PlayerWins() {
@@ -151,32 +155,32 @@ public class GameController : MonoBehaviour
             _aiEnemiesController.SoldiersToPatrollGameOver();
         }
     }
-   
+
     void Disable() {
-       // this.enabled = false;
+        // this.enabled = false;
     }
     void LoadScene() {
         ////Debug.Log("LoadScene call");
         SceneManager.LoadScene(Scenes.SampleScene.ToString());
     }
 
-    public void PlayEscapeSong(){
-        if(!audioSourceAlarm.isPlaying){
+    public void PlayEscapeSong() {
+        if(!audioSourceAlarm.isPlaying) {
             audioSourceAlarm.Play();
         }
     }
 
-    public void StopEscapeSong(){        
+    public void StopEscapeSong() {
         audioSourceAlarm.Stop();
     }
 
-    public void PlayMainSong(){        
-        if(!audioSourceMainTheme.isPlaying){
+    public void PlayMainSong() {
+        if(!audioSourceMainTheme.isPlaying) {
             audioSourceMainTheme.Play();
         }
     }
 
-    public void StopMainSong(){        
-        audioSourceMainTheme.Stop();        
+    public void StopMainSong() {
+        audioSourceMainTheme.Stop();
     }
 }

@@ -4651,8 +4651,8 @@ MonoBehaviour:
   lasTimePlayerWasSeen: 0
   lasTimePlayerWasOutOfTheLight: 0
   _aiEnemiesController: {fileID: 0}
-  showFirstRunningCourutine: 2
-  _firstRunCourutineWasRun: 1
+  showFirstRunningCourutine: 0
+  _firstRunCourutineWasRun: 0
   ExitCamera: {fileID: 493223314}
 --- !u!4 &954994300
 Transform:
