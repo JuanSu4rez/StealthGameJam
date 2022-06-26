@@ -57,15 +57,24 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
             return;
         }
         Player = collider.gameObject;
+
+        var isBehindOfaWall = false;
         if(
             _soldierMachineState.ValidateState(SoldierStates.attacking) &&
             _soldierMachineState.AttackingState.AttackState == AttackingStatesValues.attacking
             ) {
-            return;
+
+            isBehindOfaWall = PlayerIsBehindOfAWall();
+            if(isBehindOfaWall) {
+                if(IamAttacking) {
+                    GoToAttack(_soldierMachineState.AttackingState.Player, stamina);
+                }
+                return;
+            }
         }
 
 
-        var isBehindOfaWall = PlayerIsBehindOfAWall();
+         isBehindOfaWall = PlayerIsBehindOfAWall();
         if(isBehindOfaWall) {
             if(IamAttacking) {
                 GoToAttack(_soldierMachineState.AttackingState.Player, stamina);
@@ -111,7 +120,7 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
         if(!_soldierMachineState.PlayerIsAlive) {
             return;
         }
-
+        _soldierMachineState.AttackingState.DisableWeapon();
         float chasingVelocity = 4f * stamina;
         var distance = this.gameObject.transform.position - gameObject.transform.position;
         _soldierMachineState.AttackingState.Player = gameObject.transform.gameObject;

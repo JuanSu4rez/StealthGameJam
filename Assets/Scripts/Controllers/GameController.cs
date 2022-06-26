@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     public static GameController Instance = null;
     public bool gameOver = false;
     private GameObject Player;
+    public SpriteRenderer bulletSprite;
     public bool playerIsSeen;
     public float lasTimePlayerWasSeen;
     public float lasTimePlayerWasOutOfTheLight;
@@ -19,17 +20,19 @@ public class GameController : MonoBehaviour
     public AIEnemiesController AIEnemiesController {
         get => _aiEnemiesController;
     }
-    public int showFirstRunningCourutine = 0;
+    private int showFirstRunningCourutine = 0;
     public int _firstRunCourutineWasRun = 0;
     public static bool staticfirstRunCourutineWasRun;
+    public static int numberofdeads;
     private GameObject MainCamera;
     private GameObject BrainCamera;
     public GameObject ExitCamera;
+    public int framecounter = 0;
     // Use this for initialization
-    void Start() {
-
-        if(_firstRunCourutineWasRun == 1) { 
+    private void Awake() {
+        if(_firstRunCourutineWasRun == 1) {
             staticfirstRunCourutineWasRun = true;
+            showFirstRunningCourutine = 2;
         }
 
         if(Instance == null) {
@@ -38,6 +41,8 @@ public class GameController : MonoBehaviour
         else {
             Destroy(this);
         }
+    }
+    void Start() {
         ///
         PlayerConstants.IsAlive = true;
         ///
@@ -66,10 +71,20 @@ public class GameController : MonoBehaviour
         audioSourceMainTheme.volume = 0.3f;
         audioSourceAlarm.volume = 0.9f;
         PlayMainSong();
+
     }
 
     // Update is called once per frame
     void Update() {
+
+        if(framecounter == 0) {
+            if(numberofdeads > 4) {
+                GameUIController.Instance.ShowEasyModeButton();
+            }
+            if(DamageConstants.IsInEasyMode()) {
+                GameUIController.Instance.ShowEasyMode();
+            }
+        }
 
         if(showFirstRunningCourutine == 0) {
             StartCoroutine(shoWFristRunningCourutine());
@@ -90,6 +105,10 @@ public class GameController : MonoBehaviour
         else {
             StopEscapeSong();
         }
+    }
+
+    private void LateUpdate() {
+        framecounter++;
     }
 
     private IEnumerator shoWFristRunningCourutine() {
@@ -121,6 +140,7 @@ public class GameController : MonoBehaviour
 
     internal void DeadNotification(GameObject gameObject) {
         if(Player == gameObject) {
+            numberofdeads++;
             PlayerConstants.IsAlive = false;
             //ShowGameOverAndTheProperButtons
             Invoke("SoldiersToPatrollGameOver", 0.8f);

@@ -14,14 +14,16 @@ public class AutomaticGunRenderer : MonoBehaviour
             return;
         }
         this.LineRenderer = gameObject.AddComponent<LineRenderer>();
-        this.LineRenderer.startColor = new Color(255, 165, 0);
-        this.LineRenderer.endColor = Color.yellow;
-        this.LineRenderer.startWidth = 0.1f;
-        this.LineRenderer.endWidth = 0.1f;
+        //this.LineRenderer.startColor = new Color(255, 165, 0);
+        //this.LineRenderer.endColor = Color.yellow;
+        this.LineRenderer.startWidth = 0.04f;
+        this.LineRenderer.endWidth = 0.055f;
 
         LineRenderer.sortingOrder = 1;
-        LineRenderer.material = new Material(Shader.Find("Sprites/Default"));
-        LineRenderer.material.color = Color.yellow;
+        var newbulletsprte =   GameObject.Instantiate(GameController.Instance.bulletSprite);
+        LineRenderer.material = newbulletsprte.material;
+        LineRenderer.material.SetTexture("_MainTex", newbulletsprte.sprite.texture);
+        //&  LineRenderer.material.color = Color.yellow;
         this.LineRenderer.enabled = false;
     }
 
@@ -37,9 +39,9 @@ public class AutomaticGunRenderer : MonoBehaviour
             var distance = Vector3.Distance(initialpos, finallpos) ;
             Mathf.Clamp(distance, 0, distance);
             var randomvalue= Random.Range(distance * 0.2f, distance * 0.9f);
-          
-            this.LineRenderer.SetPosition(0, initialpos + ( direction.normalized * randomvalue ));
-            this.LineRenderer.SetPosition(1, initialpos+( direction.normalized * (randomvalue + 0.4f) ));
+
+            this.LineRenderer.SetPosition(0, initialpos+ ( direction.normalized * randomvalue ));
+            this.LineRenderer.SetPosition(1,  initialpos + ( direction.normalized * (randomvalue + 0.4f) ));//finallpos);//
         }
     }
 }

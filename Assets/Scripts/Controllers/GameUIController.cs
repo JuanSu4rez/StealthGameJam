@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,10 @@ using UnityEngine.UI;
 
 public class GameUIController : MonoBehaviour
 {
+    [SerializeField]
+    private Button EasyModeBtn;
+    [SerializeField]
+    private Text EasyModeText;
     [SerializeField]
     private Button ReStartBtn;
     [SerializeField]
@@ -37,6 +42,7 @@ public class GameUIController : MonoBehaviour
         }
         ReStartBtn.onClick.AddListener(GameReStartBtnClick);
         ExitGametBtn.onClick.AddListener(ExitBtnClick);
+        EasyModeBtn.onClick.AddListener(GameEasyModeBtnClick);
     }
     void Update() {
     
@@ -45,6 +51,13 @@ public class GameUIController : MonoBehaviour
         }
     }
     void GameReStartBtnClick() {
+        DamageConstants.Damage = DamageConstants.Normal_Damage;
+        DamageConstants.Frecuency = DamageConstants.Normal_Frecuency;
+        SceneManager.LoadScene(Scenes.SampleScene.ToString());
+    }
+    void GameEasyModeBtnClick() {
+        DamageConstants.Damage = DamageConstants.Easy_Damage;
+        DamageConstants.Frecuency = DamageConstants.Easy_Frecuency;
         SceneManager.LoadScene(Scenes.SampleScene.ToString());
     }
     void ExitBtnClick() {
@@ -54,6 +67,7 @@ public class GameUIController : MonoBehaviour
     public void ShowWinMessge() {
         panelWin.gameObject.SetActive(true);
         textWin.gameObject.SetActive(true);
+        HideControls();
     }
 
     public void ShowControls() {
@@ -95,5 +109,12 @@ public class GameUIController : MonoBehaviour
     public void ShowDefaultButtons() {
         ReStartBtn.gameObject.SetActive(true);
         ExitGametBtn.gameObject.SetActive(true);
+    }
+
+    public void ShowEasyModeButton() {
+        EasyModeBtn.gameObject.SetActive(true);
+    }
+    public void ShowEasyMode() {
+        EasyModeText.gameObject.SetActive(true);
     }
 }

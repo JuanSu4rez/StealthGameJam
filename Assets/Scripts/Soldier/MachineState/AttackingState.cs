@@ -49,8 +49,15 @@ public class AttackingState : MonoBehaviour, ISoldierState
         }
     }
 
+   
+
     public void StartChasing() {
         AttackState = AttackingStatesValues.chasing;
+        DisableWeapon();
+    }
+
+    public void DisableWeapon() {
+       
         if(weapon) {
             weaponBehaviour = weapon.GetComponent<IWeaponBehaviour>();
             weaponBehaviour.Disable();

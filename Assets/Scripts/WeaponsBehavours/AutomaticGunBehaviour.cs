@@ -3,15 +3,14 @@ using System.Collections;
 
 public class AutomaticGunBehaviour : MonoBehaviour, IWeaponBehaviour
 {
-    private float Damage = 5f;
-    private float Frecuency = 0.2f;
+    private float Damage = DamageConstants.Damage;
+    private float Frecuency = DamageConstants.Frecuency;
     public IDamageable _target;
     private GameObject targetGobject = null;
     public GameObject TargetGameobject { get => targetGobject; }
     private bool flag = false;
 
     public bool IsActive { get => flag; }
-
     void Awake() {
         gameObject.AddComponent<AutomaticGunRenderer>();
     }
