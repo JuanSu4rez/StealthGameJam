@@ -9,6 +9,7 @@ public class MarksController : MonoBehaviour
     private GameObject marks;
     private SoldierMachineState _soldierMachineState;
     public bool IsSearching = false;
+    private float searchingState = 1;
     void Start() {
         if(MarksPrefab)
             marks = Instantiate(MarksPrefab, MarksPrefab.transform.position, MarksPrefab.transform.rotation);
@@ -23,8 +24,13 @@ public class MarksController : MonoBehaviour
         if(_soldierMachineState.ValidateState(SoldierStates.attacking)) {
             Attacking();
         }
-        else if(IsSearching || _soldierMachineState.ValidateState(SoldierStates.searching)) {
-            Searching();
+        else if( _soldierMachineState.ValidateState(SoldierStates.searching)) {
+            if(IsSearching) {
+                Searching();
+            }
+            else if(_soldierMachineState.SearchingState.FinishSearching) {
+                ReturnToPatrol();
+            }
         }
     }
 
@@ -48,7 +54,7 @@ public class MarksController : MonoBehaviour
         Invoke("HideAllMarks", 3f);
     }
 
-    void ReturnToPatrol() {
+    public void ReturnToPatrol() {
         if(marks) {
             marks.SetActive(true);
             marks.transform.GetChild(0).gameObject.SetActive(false);

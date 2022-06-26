@@ -6,7 +6,9 @@ using UnityEngine;
 public class SearchingState : MonoBehaviour, ISoldierState
 {
     public SoldierStates SoldierState { get => SoldierStates.searching; }
-    
+    public bool FinishSearching { get; internal set; }
+
+    public SearchingStateValues SearchingStateValues = SearchingStateValues._none;
     private float counter = 0;
     private Vector3 _position = Vector3.zero;
     // Start is called before the first frame update
@@ -18,10 +20,11 @@ public class SearchingState : MonoBehaviour, ISoldierState
     // Update is called once per frame
     void Update()
     {
-        
+      
     }
 
     internal void LookAt(Vector3 position) {
         this.transform.LookAt(position);
     }
+
 }

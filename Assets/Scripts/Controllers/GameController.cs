@@ -40,14 +40,14 @@ public class GameController : MonoBehaviour
         audioSourceMainTheme.loop = true;
         audioSourceMainTheme.volume = 0.3f;
         audioSourceAlarm.volume = 0.9f;
-        PlayMainSong();
+        //PlayMainSong();
     }
 
     internal void DeadNotification(GameObject gameObject) {
         if(Player == gameObject) {
             PlayerConstants.IsAlive = false;
             //ShowGameOverAndTheProperButtons
-            Invoke("SoldiersToPatroll", 2.0f);
+            Invoke("SoldiersToPatrollGameOver", 0.1f);
             Invoke("GameOver", 2.8f);
         }
     }
@@ -56,9 +56,9 @@ public class GameController : MonoBehaviour
             gameOver = true;
         Invoke("LoadScene", 3);
     }
-    void SoldiersToPatroll() {
+    void SoldiersToPatrollGameOver() {
         if(_aiEnemiesController) {
-            _aiEnemiesController.SoldiersToPatroll();
+            _aiEnemiesController.SoldiersToPatrollGameOver();
         }
     }
     // Update is called once per frame

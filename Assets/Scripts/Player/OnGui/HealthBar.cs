@@ -29,12 +29,13 @@ public class HealthBar : MonoBehaviour
             textureCurrentHealt.SetPixel(0, 0, Color.green);
             textureCurrentHealt.Apply();
         }
-        var sqwidth = 30;
-        var sqheight = 5;
+        var sqwidth = Screen.height-20;
+        var sqheight = 10;
         Vector3 screenPos = UnityEngine.Camera.main.WorldToScreenPoint(this.transform.position);
         screenPos += new Vector3(-( sqwidth / sqheight ), 30);
-        UnityEngine.GUI.DrawTexture(new Rect(screenPos.x, Screen.height - screenPos.y - 10, sqwidth, sqheight), textureHealt);
-        var rect = new Rect(new Vector2(screenPos.x, Screen.height - screenPos.y - 10), new Vector2(sqwidth * ( healthBehaviour.Percentage ), sqheight));
+        var paddingWidth = Screen.width * 0.5f;
+        UnityEngine.GUI.DrawTexture(new Rect(Screen.width - paddingWidth, Screen.height - 30, sqwidth, sqheight), textureHealt);
+        var rect = new Rect(new Vector2(Screen.width- paddingWidth, Screen.height- 30), new Vector2(sqwidth * ( healthBehaviour.Percentage ), sqheight));
         UnityEngine.GUI.DrawTexture(rect, textureCurrentHealt);
     }
 }

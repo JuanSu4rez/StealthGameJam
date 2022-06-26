@@ -21,6 +21,15 @@ public enum AttackingStatesValues{
 }
 
 
+public enum SearchingStateValues
+{
+    _none,
+    idle,
+    moving
+}
+
+
+
 public enum SoldierAnimationStates{
     _none,
     idle,

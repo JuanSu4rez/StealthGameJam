@@ -80,7 +80,6 @@ public class WatchingController : MonoBehaviour, IWatchingHandler
 
 
     public bool PlayerIsBehindOfAWall() {
-        
         var controller = Player.GetComponent<PlayerController>();
         var result = false;
         if(controller != null) {

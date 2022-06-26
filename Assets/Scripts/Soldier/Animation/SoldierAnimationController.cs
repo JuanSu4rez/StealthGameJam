@@ -26,6 +26,7 @@ public class SoldierAnimationController : MonoBehaviour
 
         _animator.SetInteger("attackState", (int)_soldierMachineState.AttackingState.AttackState);
 
+        _animator.SetInteger("searchingState", (int)_soldierMachineState.SearchingState.SearchingStateValues);
         //Debug.Log("Soldier state "+(int)soldierState);
 
         switch(soldierState) {
@@ -38,6 +39,7 @@ public class SoldierAnimationController : MonoBehaviour
                 Debug.DrawLine(this.transform.position, this.transform.position + Vector3.up * 5, Color.blue);
                 break;
             case SoldierStates.searching:
+                Debug.DrawLine(this.transform.position, this.transform.position + Vector3.up * 5, Color.yellow);
                 break;
         }
     }
