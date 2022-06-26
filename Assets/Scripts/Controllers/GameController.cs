@@ -40,7 +40,7 @@ public class GameController : MonoBehaviour
         audioSourceMainTheme.loop = true;
         audioSourceMainTheme.volume = 0.3f;
         audioSourceAlarm.volume = 0.9f;
-        //PlayMainSong();
+        PlayMainSong();
     }
 
     internal void DeadNotification(GameObject gameObject) {
