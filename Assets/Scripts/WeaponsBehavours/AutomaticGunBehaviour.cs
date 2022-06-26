@@ -6,10 +6,15 @@ public class AutomaticGunBehaviour : MonoBehaviour, IWeaponBehaviour
     private float Damage = 5f;
     private float Frecuency = 0.2f;
     public IDamageable _target;
-    private GameObject targetgo = null;
+    private GameObject targetGobject = null;
+    public GameObject TargetGameobject { get => targetGobject; }
     private bool flag = false;
 
     public bool IsActive { get => flag; }
+
+    void Awake() {
+        gameObject.AddComponent<AutomaticGunRenderer>();
+    }
 
     // Use this for initialization
     void Start() {
@@ -19,7 +24,7 @@ public class AutomaticGunBehaviour : MonoBehaviour, IWeaponBehaviour
     IEnumerator DamageRutine() {
         yield return new WaitForSeconds(0.01f);
         while(flag) {
-            Debug.DrawLine(transform.position, targetgo.transform.position, Color.cyan, 3);
+            Debug.DrawLine(transform.position, targetGobject.transform.position, Color.cyan, 3);
             yield return new WaitForSeconds(Frecuency);
             if( _target.IsVulnerable ) {
                 _target.ApplyDamage(Damage);
@@ -29,7 +34,7 @@ public class AutomaticGunBehaviour : MonoBehaviour, IWeaponBehaviour
     }
 
     public void SetTarget(GameObject gameObject) {
-        targetgo = gameObject;
+        targetGobject = gameObject;
         var target = gameObject?.GetComponent<IDamageable>();
         if(target != null) {
             _target = target;

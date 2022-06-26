@@ -57,6 +57,13 @@ public class AttackingState : MonoBehaviour, ISoldierState
         }
     }
 
+    void OnDisable() {
+        if(weapon) {
+            weaponBehaviour = weapon.GetComponent<IWeaponBehaviour>();
+            weaponBehaviour.Disable();
+        }
+    }
+
     public Vector3 DistanceWithThePlayer() {
         var distance = this.gameObject.transform.position - Player.transform.position;
         return distance;

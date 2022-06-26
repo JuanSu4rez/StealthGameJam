@@ -19,16 +19,37 @@ public class GameController : MonoBehaviour
     public AIEnemiesController AIEnemiesController {
         get => _aiEnemiesController;
     }
+    public int showFirstRunningCourutine = 0;
+    public bool _firstRunCourutineWasRun = false;
+    public static bool staticfirstRunCourutineWasRun = false;
+    private GameObject MainCamera;
+    private GameObject BrainCamera;
+    public GameObject ExitCamera;
     // Use this for initialization
     void Start() {
+        staticfirstRunCourutineWasRun = _firstRunCourutineWasRun;
         if(Instance == null) {
             Instance = this;
         }
         else {
             Destroy(this);
         }
+        ///
         PlayerConstants.IsAlive = true;
+        ///
         Player = GameObject.FindGameObjectWithTag("Player");
+        var controller = Player.GetComponent<PlayerController>();
+        if(controller && !staticfirstRunCourutineWasRun) {
+            controller.enabled = false;
+        }
+        ///
+        MainCamera = GameObject.Find("Main Camera");
+        BrainCamera = GameObject.Find("CM vcam1");
+        ExitCamera.SetActive(false);
+        ///
+        if(staticfirstRunCourutineWasRun) {
+            showFirstRunningCourutine = 2;
+        }
         if(Player == null)
             throw new Exception("Player can not be null.");
         var objAiEnemiesController =  GameObject.Find("AIEnemiesController");
@@ -41,6 +62,57 @@ public class GameController : MonoBehaviour
         audioSourceMainTheme.volume = 0.3f;
         audioSourceAlarm.volume = 0.9f;
         PlayMainSong();
+    }
+
+    // Update is called once per frame
+    void Update() {
+
+        if(showFirstRunningCourutine == 0 ) {
+            StartCoroutine(shoWFristRunningCourutine());
+        }
+
+        if(showFirstRunningCourutine == 1) {
+            return;
+        }
+
+        if(gameOver) {
+            Disable();
+            StopMainSong();
+            StopEscapeSong();
+        }
+        if(playerIsSeen) {
+            PlayEscapeSong();
+        }
+        else {
+            StopEscapeSong();
+        }
+    }
+
+    private IEnumerator shoWFristRunningCourutine() {
+        showFirstRunningCourutine = 1;
+        GameUIController.Instance.ShowIntro();
+        GameUIController.Instance.HideDefaultButtons();
+        yield return new WaitForSeconds(5f);
+        GameUIController.Instance.HideIntro();
+        GameUIController.Instance.ShowGoal();
+        BrainCamera.SetActive(false);
+        MainCamera.SetActive(false);
+        ExitCamera.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        GameUIController.Instance.HideGoal();
+        GameUIController.Instance.ShowControls();
+        GameUIController.Instance.ShowDefaultButtons();
+        BrainCamera.SetActive(true);
+        MainCamera.SetActive(true);
+        ExitCamera.SetActive(false);
+
+        var controller = Player.GetComponent<PlayerController>();
+        if(controller) {
+            controller.enabled = true;
+        }
+
+        showFirstRunningCourutine = 2;
+        staticfirstRunCourutineWasRun = true;
     }
 
     internal void DeadNotification(GameObject gameObject) {
@@ -79,18 +151,7 @@ public class GameController : MonoBehaviour
             _aiEnemiesController.SoldiersToPatrollGameOver();
         }
     }
-    // Update is called once per frame
-    void Update() {
-        if(gameOver) {
-            Disable();
-            StopMainSong();
-            StopEscapeSong();
-        }
-        if(playerIsSeen){            
-            PlayEscapeSong();
-        } else {
-            StopEscapeSong();}
-    }
+   
     void Disable() {
        // this.enabled = false;
     }

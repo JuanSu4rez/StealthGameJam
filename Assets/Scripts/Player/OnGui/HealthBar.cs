@@ -12,11 +12,13 @@ public class HealthBar : MonoBehaviour
     }
     // Update is called once per frame
     void OnGUI() {
-        if(healthBehaviour.IsAlive ) {
-            Vector3 screenPos = UnityEngine.Camera.main.WorldToScreenPoint(this.transform.position);
-            Vector2 v2 = new Vector2(screenPos.x, Screen.height - screenPos.y);
-            UnityEngine.GUI.contentColor = Color.cyan;
-            drawHealthGUIBar();
+        if(healthBehaviour.IsAlive) {
+            if(UnityEngine.Camera.main != null) {
+                Vector3 screenPos = UnityEngine.Camera.main.WorldToScreenPoint(this.transform.position);
+                Vector2 v2 = new Vector2(screenPos.x, Screen.height - screenPos.y);
+                UnityEngine.GUI.contentColor = Color.cyan;
+                drawHealthGUIBar();
+            }
         }
     }
 
@@ -29,14 +31,14 @@ public class HealthBar : MonoBehaviour
             textureCurrentHealt.SetPixel(0, 0, Color.green);
             textureCurrentHealt.Apply();
         }
-        var sqwidth = Screen.width-( Screen.width *0.5f);
+        var sqwidth = Screen.width - ( Screen.width * 0.5f );
         var x = ( Screen.width * 0.25f );
         var sqheight = 10;
         Vector3 screenPos = UnityEngine.Camera.main.WorldToScreenPoint(this.transform.position);
         screenPos += new Vector3(-( sqwidth / sqheight ), 30);
         var paddingWidth = Screen.width * 0.5f;
         UnityEngine.GUI.DrawTexture(new Rect(x, Screen.height - 30, sqwidth, sqheight), textureHealt);
-        var rect = new Rect(new Vector2(x, Screen.height- 30), new Vector2(sqwidth * ( healthBehaviour.Percentage ), sqheight));
+        var rect = new Rect(new Vector2(x, Screen.height - 30), new Vector2(sqwidth * ( healthBehaviour.Percentage ), sqheight));
         UnityEngine.GUI.DrawTexture(rect, textureCurrentHealt);
     }
 }
