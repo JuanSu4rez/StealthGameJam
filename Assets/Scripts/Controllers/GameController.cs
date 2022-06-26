@@ -21,18 +21,18 @@ public class GameController : MonoBehaviour
     }
     // Use this for initialization
     void Start() {
+        if(Instance == null) {
+            Instance = this;
+        }
+        else {
+            Destroy(this);
+        }
         PlayerConstants.IsAlive = true;
         Player = GameObject.FindGameObjectWithTag("Player");
         if(Player == null)
             throw new Exception("Player can not be null.");
         var objAiEnemiesController =  GameObject.Find("AIEnemiesController");
         _aiEnemiesController = objAiEnemiesController.GetComponent<AIEnemiesController>();
-        if(Instance == null) {
-            Instance = this;
-        }
-        else{
-            Destroy(this);
-        }
         audioSourceAlarm = gameObject.AddComponent<AudioSource>();        
         audioSourceAlarm.clip = escapeSong;
         audioSourceMainTheme = gameObject.AddComponent<AudioSource>();
@@ -47,15 +47,33 @@ public class GameController : MonoBehaviour
         if(Player == gameObject) {
             PlayerConstants.IsAlive = false;
             //ShowGameOverAndTheProperButtons
-            Invoke("SoldiersToPatrollGameOver", 0.1f);
+            Invoke("SoldiersToPatrollGameOver", 1.5f);
             Invoke("GameOver", 2.8f);
         }
     }
 
     void GameOver() {
-            gameOver = true;
+        gameOver = true;
         Invoke("LoadScene", 3);
     }
+
+    public void PlayerWins() {
+        gameOver = true;
+        var healthBehaviour = Player.GetComponent<HealthBehaviour>();
+        if(healthBehaviour) {
+            healthBehaviour.IsVulnerable = false;
+        }
+        MonoBehaviour behaviour = Player.GetComponent<HealthBar>();
+        if(behaviour) {
+            behaviour.enabled = false;
+        }
+        GameUIController.Instance.ShowWinMessge();
+        Invoke("SoldiersToPatrollGameOver", 1.5f);
+        if(_aiEnemiesController) {
+            _aiEnemiesController.PlayerWins();
+        }
+    }
+
     void SoldiersToPatrollGameOver() {
         if(_aiEnemiesController) {
             _aiEnemiesController.SoldiersToPatrollGameOver();

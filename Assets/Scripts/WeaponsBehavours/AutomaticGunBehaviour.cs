@@ -19,9 +19,11 @@ public class AutomaticGunBehaviour : MonoBehaviour, IWeaponBehaviour
     IEnumerator DamageRutine() {
         yield return new WaitForSeconds(0.01f);
         while(flag) {
-            Debug.DrawLine(transform.position, targetgo.transform.position, Color.cyan,3);
+            Debug.DrawLine(transform.position, targetgo.transform.position, Color.cyan, 3);
             yield return new WaitForSeconds(Frecuency);
-            _target.ApplyDamage(Damage);
+            if( _target.IsVulnerable ) {
+                _target.ApplyDamage(Damage);
+            }
         }
         //Debug.Log("End DamageRutine");
     }

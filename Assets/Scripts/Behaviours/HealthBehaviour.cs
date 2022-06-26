@@ -10,6 +10,8 @@ public class HealthBehaviour : MonoBehaviour, IDamageable{
     public float Health { get => health; }
     public bool IsAlive { get => health >= 0; }
     public float Percentage { get => health / maxHealth; }
+    public bool IsVulnerable { get; set; } = true;
+
     // Use this for initialization
     void Start() {
         this.enabled = false;

@@ -2,7 +2,8 @@
 using System.Collections;
 using System;
 
-public class AIEnemiesController : MonoBehaviour{
+public class AIEnemiesController : MonoBehaviour
+{
     // Use this for initialization
     void Start() {
 
@@ -15,7 +16,7 @@ public class AIEnemiesController : MonoBehaviour{
     public void SoldiersToPatroll() {
         ////Debug.Log("AIEnemiesController SoldiersToPatroll");
         int changedSoilders = 0;
-        var soldiers =  GetListOfSoilders();
+        var soldiers = GetListOfSoilders();
         if(soldiers != null && soldiers.Length > 0) {
             ////Debug.Log("SoldiersToPatroll "+ soldiers.Length);
             foreach(var soldier in soldiers) {
@@ -39,7 +40,7 @@ public class AIEnemiesController : MonoBehaviour{
             ////Debug.Log("SoldiersToPatroll "+ soldiers.Length);
             foreach(var soldier in soldiers) {
                 var _soldierMachineState = soldier.GetComponent<SoldierMachineState>();
-                if(!_soldierMachineState.ValidateState(SoldierStates.patrol) ) {
+                if(!_soldierMachineState.ValidateState(SoldierStates.patrol)) {
                     _soldierMachineState.SetState(_soldierMachineState.PatrolState);
                     changedSoilders++;
                 }
@@ -57,6 +58,37 @@ public class AIEnemiesController : MonoBehaviour{
                 if(watchingController) {
                     watchingController.GoToAttack(gameObject);
                     changedSoilders++;
+                }
+            }
+        }
+        ////Debug.Log("PlayerIsSpottedEnd " + changedSoilders);
+    }
+
+
+
+    public void PlayerWins() {
+        var soldiers = GetListOfSoilders();
+        if(soldiers != null && soldiers.Length > 0) {
+            foreach(var soldier in soldiers) {
+                MonoBehaviour monoBehavoiur = soldier.GetComponent<ColliderController>();
+                if(monoBehavoiur) { 
+                    monoBehavoiur.enabled = false;
+                }
+                monoBehavoiur = soldier.GetComponent<HearingController>();
+                if(monoBehavoiur) {
+                    monoBehavoiur.enabled = false;
+                }
+                monoBehavoiur = soldier.GetComponent<WatchingController>();
+                if(monoBehavoiur) {
+                    monoBehavoiur.enabled = false;
+                }
+                monoBehavoiur = soldier.GetComponent<SoundsController>();
+                if(monoBehavoiur) {
+                    monoBehavoiur.enabled = false;
+                }
+                var _soldierMachineState = soldier.GetComponent<SoldierMachineState>();
+                if(_soldierMachineState) {
+                    _soldierMachineState.SetState(_soldierMachineState.PatrolState);
                 }
             }
         }

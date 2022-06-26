@@ -10,7 +10,7 @@ public class ColliderController : MonoBehaviour
     private HearingController hearingController;
     private WatchingController watchingController;
     private SoldierMachineState _soldierMachineState;
-    
+
 
     // Start is called before the first frame update
     void Start() {
@@ -39,15 +39,15 @@ public class ColliderController : MonoBehaviour
     void OnTriggerExit(Collider other) {
         ////Debug.Log("OnTriggerEnter colliderController");
         Debug.DrawLine(other.transform.position, other.transform.position + Vector3.up * 5, Color.white);
-        if(watchingController.IamAttacking ) {
+        if(watchingController.IamAttacking) {
             watchingController.HandleOnvisionExit(other);
         }
     }
 
-   
+
     public bool IsOnVisionRange(GameObject gameObject) {
         if(visionCollider.ClosestPointOnBounds(gameObject.transform.position) == gameObject.transform.position) {
-          //  Debug.Log(gameObject.name + " IS ON vision range");
+            //  Debug.Log(gameObject.name + " IS ON vision range");
             return true;
         }
         return false;
@@ -68,12 +68,17 @@ public class ColliderController : MonoBehaviour
             }
             else {
                 //watchingController.IamAttacking = false;
-               var playerIsRunning = playerController.PlayerState == PlayerStates.running;
+                var playerIsRunning = playerController.PlayerState == PlayerStates.running;
                 ////Debug.Log("OnTriggerEnter " + playerIsRunning+" "+ playerController.PlayerState);
                 if(playerIsRunning) {
                     hearingController.HandleHearing(other);
                 }
             }
         }
+    }
+
+    void OnDisable() {
+        visionCollider.enabled = false;
+        sphereCollider.enabled = false;
     }
 }

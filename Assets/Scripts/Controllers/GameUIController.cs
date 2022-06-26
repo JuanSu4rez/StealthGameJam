@@ -10,7 +10,18 @@ public class GameUIController : MonoBehaviour
     private Button ReStartBtn;
     [SerializeField]
     private Button ExitGametBtn;
+    [SerializeField]
+    private Image panelWin;
+    [SerializeField]
+    private Text textWin;
+    public static GameUIController Instance = null;
     void Start() {
+        if(Instance == null) {
+            Instance = this;
+        }
+        else {
+            Destroy(this);
+        }
         ReStartBtn.onClick.AddListener(GameReStartBtnClick);
         ExitGametBtn.onClick.AddListener(ExitBtnClick);
     }
@@ -25,5 +36,10 @@ public class GameUIController : MonoBehaviour
     }
     void ExitBtnClick() {
         Application.Quit();
+    }
+
+    public void ShowWinMessge() {
+        panelWin.gameObject.SetActive(true);
+        textWin.gameObject.SetActive(true);
     }
 }
