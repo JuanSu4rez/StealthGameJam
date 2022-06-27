@@ -43,6 +43,7 @@ public class GameController : MonoBehaviour
         }
     }
     void Start() {
+        framecounter = 0;
         ///
         PlayerConstants.IsAlive = true;
         ///

@@ -28,7 +28,9 @@ public class LocoMotionState : MonoBehaviour
             HasReachThePoint = true;
             Stop();
         }
+        /*
         else {
+
             float lastPositionDistance = Mathf.Abs(Vector3.Distance(position, lastPosition)) * 1000.0f;
             if(lastPositionDistance <= 0.5f) {
                 stuckCounter++;
@@ -36,11 +38,11 @@ public class LocoMotionState : MonoBehaviour
             else {
                 stuckCounter = 0;
             }
-            if(stuckCounter == 10) {
+            if(stuckCounter == 20) {
                 HasReachThePoint = true;
                 Stop();
             }
-        }
+        }*/
         lastPosition = transform.position;
     }
     public void SetDestiny(Vector3 vector, float speed = 1.2f) {

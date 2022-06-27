@@ -3836,7 +3836,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.0516605, y: 1}
+    m_SensorSize: {x: 2.1140685, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -11875,7 +11875,6 @@ MonoBehaviour:
   EasyModeBtn: {fileID: 714401131}
   EasyModeText: {fileID: 343053074}
   ReStartBtn: {fileID: 270949530}
-  ExitGametBtn: {fileID: 4835420950749424783}
   panelWin: {fileID: 242479804}
   textWin: {fileID: 932167819}
   panelControls: {fileID: 1275184004}
@@ -11931,7 +11930,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &4835420950749424782
 MonoBehaviour:
   m_ObjectHideFlags: 0

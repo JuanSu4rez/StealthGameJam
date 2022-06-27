@@ -13,8 +13,10 @@ public class GameUIController : MonoBehaviour
     private Text EasyModeText;
     [SerializeField]
     private Button ReStartBtn;
+#if !UNITY_WEBGL
     [SerializeField]
     private Button ExitGametBtn;
+#endif
     [SerializeField]
     private Image panelWin;
     [SerializeField]
@@ -41,14 +43,18 @@ public class GameUIController : MonoBehaviour
             Destroy(this);
         }
         ReStartBtn.onClick.AddListener(GameReStartBtnClick);
+#if !UNITY_WEBGL
         ExitGametBtn.onClick.AddListener(ExitBtnClick);
+        ExitGametBtn.gameObject.SetActive(true);
+#endif
         EasyModeBtn.onClick.AddListener(GameEasyModeBtnClick);
     }
     void Update() {
-    
+#if !UNITY_WEBGL
         if(Input.GetKey(KeyCode.Escape)) {
             Application.Quit();
         }
+#endif
     }
     void GameReStartBtnClick() {
         DamageConstants.Damage = DamageConstants.Normal_Damage;
@@ -103,12 +109,16 @@ public class GameUIController : MonoBehaviour
 
     public void HideDefaultButtons() {
         ReStartBtn.gameObject.SetActive(false);
+#if !UNITY_WEBGL
         ExitGametBtn.gameObject.SetActive(false);
+#endif
     }
 
     public void ShowDefaultButtons() {
         ReStartBtn.gameObject.SetActive(true);
+#if !UNITY_WEBGL
         ExitGametBtn.gameObject.SetActive(true);
+#endif
     }
 
     public void ShowEasyModeButton() {
