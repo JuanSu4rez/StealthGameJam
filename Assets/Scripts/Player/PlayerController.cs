@@ -25,6 +25,13 @@ public class PlayerController : MonoBehaviour, IPlayerController{
         animator = gameObject.GetComponent<Animator>();
         healthBehaviour = gameObject.GetComponent<HealthBehaviour>();
         capsuleColliders = this.GetComponents<CapsuleCollider>();
+        var firstCapsuleCollider = capsuleColliders[0];
+        if(capsuleColliders.Length > 1) {
+            if(firstCapsuleCollider.height > capsuleColliders[1].height) {
+                capsuleColliders[0] = capsuleColliders[1];
+                capsuleColliders[1] = firstCapsuleCollider;
+            }
+        }
         audioSource = this.GetComponent<AudioSource>();
         capsuleColliders[0].enabled = true;
         if(capsuleColliders.Length > 1) {
