@@ -3917,7 +3917,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.3579767, y: 1}
+    m_SensorSize: {x: 0.7556326, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -5015,7 +5015,7 @@ MonoBehaviour:
   lasTimePlayerWasSeen: 0
   lasTimePlayerWasOutOfTheLight: 0
   _aiEnemiesController: {fileID: 0}
-  _firstRunCourutineWasRun: 1
+  _firstRunCourutineWasRun: 0
   ExitCamera: {fileID: 493223314}
   framecounter: 0
 --- !u!4 &954994300
