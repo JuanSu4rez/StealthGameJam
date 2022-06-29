@@ -33,7 +33,7 @@ public class AlarmController : MonoBehaviour
     {
         originalColor = light.color;
         originalIntensity = light.intensity;
-        finalIntensity = 1.5f;
+        finalIntensity = 3f;
         speed = 1.25f;
         lightGoingUp = true;
         tolerance = 0.3f;
